@@ -14,7 +14,7 @@ public class TestSchedule {
         Schedule s2 = new Schedule(1, new TimePoint(0, 30), new TimePoint(1, 45));
         int result  = s1.compareTo(s2);
         
-        System.out.printf("%-65s [%s] (%d)\n" ,s1.toString() + " comes before " + s2.toString(),
+        System.out.printf("%-70s [%s] (%d)\n" ,s1.toString() + " comes before " + s2.toString(),
                                                (result < 0 ? "PASSED" : "FAILED"), result);
       }
       
@@ -25,7 +25,7 @@ public class TestSchedule {
         Schedule s2 = new Schedule(1, new TimePoint(1, 15), new TimePoint(1, 30));
         int result  = s1.compareTo(s2);
         
-        System.out.printf("%-65s [%s] (%d)\n" ,s1.toString() + " comes before " + s2.toString(),
+        System.out.printf("%-70s [%s] (%d)\n" ,s1.toString() + " comes before " + s2.toString(),
                                                (result < 0 ? "PASSED" : "FAILED"), result);
       }
       
@@ -36,7 +36,7 @@ public class TestSchedule {
         Schedule s2 = new Schedule(2, new TimePoint(0, 15), new TimePoint(0, 30));
         int result  = s1.compareTo(s2);
         
-        System.out.printf("%-65s [%s] (%d)\n" ,s1.toString() + " comes before " + s2.toString(),
+        System.out.printf("%-70s [%s] (%d)\n" ,s1.toString() + " comes before " + s2.toString(),
                                                (result < 0 ? "PASSED" : "FAILED"), result);
       }
       
@@ -45,7 +45,7 @@ public class TestSchedule {
         Schedule s2 = new Schedule(1, new TimePoint(0, 15), new TimePoint(0, 30));
         int result  = s1.compareTo(s2);
         
-        System.out.printf("%-65s [%s] (%d)\n" , s1.toString() + " and " + s2.toString() + "have a difference of zero ", 
+        System.out.printf("%-65s [%s] (%d)\n" , s1.toString() + " and " + s2.toString() + " have a difference of zero ", 
                                               (result == 0 ? "PASSED" : "FAILED"), result);
       }
       

@@ -24,8 +24,8 @@ public class Schedule implements Comparable<Schedule> {
     
     /**
      * @param weekDay   The day of the week (0 - MON, 7 - SUN)
-     * @param from      Time in hours   (0 - 24)
-     * @param to        Time in minutes (0 - 60)
+     * @param from      Time in hours   (0 - 23)
+     * @param to        Time in minutes (0 - 59)
      */
     public Schedule(int weekDay, TimePoint from, TimePoint to) 
     {
@@ -34,6 +34,14 @@ public class Schedule implements Comparable<Schedule> {
         this.timeTo    = to;
     }
     
+    /**
+     * 
+     * @param weekDay   The day of the week (0 - MON, 7 - SUN)
+     * @param hhFrom    The hour of the start of the schedule   (0 - 23)
+     * @param mmFrom    The minute of the start of the schedule (0 - 59)
+     * @param hhTo      The hour of the end of the schedule     (0 - 23)
+     * @param mmTo      The minute of the end of the schedule   (0 - 59)
+     */
     public Schedule(int weekDay, int hhFrom, int mmFrom, int hhTo, int mmTo) 
     {
         this.dayOfWeek = weekDay;
@@ -49,7 +57,7 @@ public class Schedule implements Comparable<Schedule> {
        	return timeTo; 
     }
     
-    public int getDayOfWeek() {
+    public int getDay() {
         return dayOfWeek;
     }
     
@@ -59,8 +67,18 @@ public class Schedule implements Comparable<Schedule> {
      */
     @Override
     public int compareTo(Schedule other) {
-        return ((dayOfWeek - other.getDayOfWeek()) * 60 * 24) + 
+        return ((dayOfWeek - other.getDay()) * 60 * 24) + 
                 (timeFrom.inMinutes() - other.getTimeFrom().inMinutes());
+    }
+    
+    public String getDayString() {
+        String[] str = { 
+            "Monday",   "Tuesday", "Wednesday", 
+            "Thursday", "Friday",  "Saturday", 
+            "Sunday"
+        };
+        
+        return str[dayOfWeek];
     }
     
     // Note(uriel): mostly irrelevant since sa time is displayed in the UI, 
@@ -68,15 +86,9 @@ public class Schedule implements Comparable<Schedule> {
     @Override
     public String toString()
     {
-        String[] str = { 
-            "Monday",   "Tuesday", "Wednesday", 
-            "Thursday", "Friday",  "Saturday", 
-            "Sunday"
-        };
-        
-        return str[dayOfWeek] + " " + timeFrom.getHourString() + ":" 
-                                    + timeFrom.getMinuteString()
-                              + "-" + timeTo.getHourString()   + ":" 
-                                    + timeTo.getMinuteString(); 
+        return getDayString() + " " + timeFrom.getHourString() 
+                              + ":" + timeFrom.getMinuteString()
+                              + "-" + timeTo.getHourString()   
+                              + ":" + timeTo.getMinuteString(); 
     }
 }
