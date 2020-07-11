@@ -74,7 +74,9 @@ public class Schedule implements Comparable<Schedule> {
             "Sunday"
         };
         
-        return str[dayOfWeek] + " " + timeFrom.getHour() + ":" + timeFrom.getMinute()
-                              + "-" + timeTo.getHour()   + ":" + timeTo.getMinute(); 
+        return str[dayOfWeek] + " " + timeFrom.getHourString() + ":" 
+                                    + timeFrom.getMinuteString()
+                              + "-" + timeTo.getHourString()   + ":" 
+                                    + timeTo.getMinuteString(); 
     }
 }

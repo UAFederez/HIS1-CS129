@@ -30,4 +30,12 @@ public class TimePoint {
     public int inMinutes() {
         return (hour * 60) + minute;
     }
+    
+    public String getHourString() {
+        return (hour < 10 ? "0" + hour : "" + hour);
+    }
+    
+    public String getMinuteString() {
+        return (minute < 10 ? "0" + minute : "" + minute);
+    }
 }
