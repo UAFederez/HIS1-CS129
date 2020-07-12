@@ -16,12 +16,12 @@ public class Schedule implements Comparable<Schedule> {
     private final TimePoint timeTo;
     private final boolean   isByAppointment;
     
-    /** TODO: Because doctors will be listed by sorted schedule, one way is to create
+    /** Note: Because doctors will be listed by sorted schedule, one way is to create
      *        a new array of Schedules, put all the schedules of all the doctors
      *        in, and then sort the array. But to show the doctor info, we need a 
      *        reference to the actual Doctor object who has this schedule.
     **/
-    // private final Doctor associatedDoctor;
+    private Doctor associatedDoctor;
     
     /**
      * @param weekDay   The day of the week (0 - MON, 7 - SUN)
@@ -69,6 +69,14 @@ public class Schedule implements Comparable<Schedule> {
     
     public boolean isByAppointment() {
         return isByAppointment;
+    }
+    
+    public void setAssociatedDoctor(Doctor doctor) {
+        associatedDoctor = d;
+    }
+    
+    public Doctor getAssociatedDoctor() {
+        return associatedDoctor;
     }
     
     /**
