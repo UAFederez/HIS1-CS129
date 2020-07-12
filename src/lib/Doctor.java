@@ -42,6 +42,7 @@ public abstract class Doctor {
     }
     
     public void addSchedule(Schedule newSchedule) {
+        newSchedule.setAssociatedDoctor(this);
         schedules.add(newSchedule);
     }
     
