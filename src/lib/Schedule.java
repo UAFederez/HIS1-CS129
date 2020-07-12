@@ -72,7 +72,7 @@ public class Schedule implements Comparable<Schedule> {
     }
     
     public void setAssociatedDoctor(Doctor doctor) {
-        associatedDoctor = d;
+        associatedDoctor = doctor;
     }
     
     public Doctor getAssociatedDoctor() {
