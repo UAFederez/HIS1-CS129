@@ -99,7 +99,7 @@ public class TestCSVFileIO {
                                     sched.getTimeFrom().getMinuteString() + "," +
                                     sched.getTimeTo().getHourString()     + ":" +
                                     sched.getTimeTo().getMinuteString()   + "," +
-                                    sched.isByAppointment());
+                                    (sched.isByAppointment() ? 1 : 0));
                 }
             }
             
@@ -140,7 +140,7 @@ public class TestCSVFileIO {
                     int dayOfWeek        = scanner.nextInt();
                     String timeFromStr[] = scanner.next().split(":");
                     String timeToStr[]   = scanner.next().split(":");
-                    boolean isByAppt     = scanner.next().equals("true");
+                    boolean isByAppt     = (scanner.nextInt() == 1);
                     
                     TimePoint timeFrom   = new TimePoint(Integer.parseInt(timeFromStr[0]), 
                                                          Integer.parseInt(timeFromStr[1]));
