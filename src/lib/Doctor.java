@@ -29,7 +29,7 @@ public abstract class Doctor {
         this.schedules = new ArrayList<>();
     }
     
-    public double getRate() {
+    public double getConsultationRate() {
         return consultationRate;
     }
     
@@ -51,7 +51,7 @@ public abstract class Doctor {
         return schedules;
     }
     
-    public void setRate(double newRate) {
+    public void setConsultationRate(double newRate) {
         this.consultationRate = newRate;
     }
     

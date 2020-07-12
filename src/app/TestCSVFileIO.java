@@ -89,7 +89,7 @@ public class TestCSVFileIO {
                 writer.println("0," + 
                                d.getFirstName() + "," + 
                                d.getLastName()  + "," +
-                               d.getRate()      + "," + 
+                               d.getConsultationRate()      + "," + 
                                d.getSpecialization());
                 
                 for(Schedule sched : d.getSchedules())
@@ -127,9 +127,8 @@ public class TestCSVFileIO {
                     String lastName    = scanner.next();
                     double consultRate = scanner.nextDouble();
                     
-                    
                     Doctor d = createDoctor(scanner.next());
-                    d.setRate(consultRate);
+                    d.setConsultationRate(consultRate);
                     
                     System.out.printf("%s (PHP %.2f fee)\n", "Reading info for Dr." + firstName + " " 
                                                              + lastName, consultRate);
