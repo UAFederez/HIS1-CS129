@@ -19,6 +19,8 @@ public class DoctorFactory {
         else if("cardiology".equalsIgnoreCase(specialization))
             doctor = new Cardiologist(fname, lname);
         
+        doctor.computeRate();
+        
         return doctor;
     }
 }

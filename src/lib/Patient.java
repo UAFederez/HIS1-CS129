@@ -5,6 +5,8 @@
  */
 package lib;
 
+import java.util.Date;
+
 /**
  *
  * @author uafederez
@@ -14,10 +16,10 @@ public class Patient {
     private final String lastName;
     
     // TODO: change these to proper types
-    private final String birthday;        
+    private final Date   birthday;        
     private final String gender;
 
-    public Patient(String fname, String lname, String bday, String gender)
+    public Patient(String fname, String lname, Date bday, String gender)
     {
         this.firstName = fname;
         this.lastName  = lname;
@@ -33,7 +35,7 @@ public class Patient {
         return lastName;
     }
 
-    public String getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 

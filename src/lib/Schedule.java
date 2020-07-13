@@ -40,6 +40,27 @@ public class Schedule implements Comparable<Schedule> {
     
     /**
      * 
+     * @param inputString Input string to parse (assumes WeekDay TFH:TFM-TTH:TTM)
+     *                    where TF - time from, TT - time to, H - hour, M - minute
+     */
+    public Schedule(String inputString)
+    {
+        String[] dayAndTime  = inputString.split(" ");
+        String[] times       = dayAndTime[1].split("-");
+        String[] timeFromStr = times[0].split(":");
+        String[] timeToStr   = times[1].split(":");
+        
+        this.dayOfWeek = Integer.parseInt(dayAndTime[0]);
+        this.timeFrom  = new TimePoint(Integer.parseInt(timeFromStr[0]), 
+                                       Integer.parseInt(timeFromStr[1]));
+        
+        this.timeTo    = new TimePoint(Integer.parseInt(timeToStr[0]), 
+                                       Integer.parseInt(timeToStr[1]));
+        this.isByAppointment = true;
+    }
+    
+    /**
+     * 
      * @param weekDay   The day of the week (0 - MON, 7 - SUN)
      * @param hhFrom    The hour of the start of the schedule   (0 - 23)
      * @param mmFrom    The minute of the start of the schedule (0 - 59)
@@ -79,6 +100,12 @@ public class Schedule implements Comparable<Schedule> {
         return associatedDoctor;
     }
     
+    public boolean equals(Schedule other) {
+        return dayOfWeek == other.dayOfWeek    &&
+               timeFrom.equals(other.timeFrom) &&
+               timeTo.equals(other.timeTo);
+    }
+                       
     /**
      * @param other The schedule to compare with
      * @return an integer value of the difference in minutes

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import lib.Cardiologist;
 import lib.Doctor;
+import lib.DoctorFactory;
 import lib.Schedule;
 import lib.TimePoint;
 
@@ -23,51 +24,41 @@ import lib.TimePoint;
  */
 public class TestCSVFileIO {
     
-    static Random rand     = new Random();
+    static Random random     = new Random();
     
-    public static Doctor createDoctor(String type) {
-        Doctor d = null;
-        
-        // Note: based on what I've read, this is essentially how DoctorFactory 
-        //       will be implemented just w/o input values yet.
-        if(type.equals("Cardiologist"))
-            d = new Cardiologist("fname", "lname");
-        
-        return d;
-    }
+    public static final String[] SPECIALIZATIONS = {
+        "Cardiology", 
+        "Gastroentrology"
+    };
     
-    /**
-     * 
-     * @param type Specialization of doctor to create
-     * @return A doctor with the appropriate specialization
-     */
-    public static Doctor generateDoctor(String type) 
+    private static ArrayList<Doctor> createTestDoctors(String[] specializations)
     {
-        Doctor d = createDoctor(type);
+        DoctorFactory  factory        = new DoctorFactory();
+        ArrayList<Doctor> testDoctors = new ArrayList<>();
         
-        if(d != null)
+        for(String spec : specializations)
         {
-            d.computeRate();
-            d.addSchedule(new Schedule(2, new TimePoint(9, 00), new TimePoint(12, 0), false));
-            d.addSchedule(new Schedule(4, new TimePoint(9, 00), new TimePoint(12, 0), false));
+            Doctor doctor = factory.create(spec, "fname", "lname (" + spec + ")");
+            
+            int numSchedules = 2 + random.nextInt(3);
+            for(int i = 0; i < numSchedules; ++i)
+            {
+                TimePoint from = new TimePoint(random.nextInt(23), random.nextInt(59));
+                TimePoint to   = new TimePoint((from.getHour() + 3) % 24, from.getMinute());
+                
+                doctor.addSchedule(new Schedule(random.nextInt(6), from, to, true));
+            }
+            testDoctors.add(doctor);
         }
         
-        return d;
+        return testDoctors;
     }
     
     public static void main(String[] args) {
-        ArrayList<Doctor> doctors = new ArrayList<>();
-        
-        // For now just generate 10 cardiologists
-        for(int i = 0; i < 10; ++i)
-        {
-            Doctor d = generateDoctor("Cardiologist");
-            doctors.add(d);
-        }
+        ArrayList<Doctor> doctors = createTestDoctors(SPECIALIZATIONS);
         
         writeDoctorsToCSV(doctors);
         readDoctorsFromCSV("csvtest.csv");
-
     }
     
     // TODO: probably encapsulate this in a CSVWriter since we have a CSVScanner, but
@@ -112,6 +103,7 @@ public class TestCSVFileIO {
     
     public static ArrayList<Doctor> readDoctorsFromCSV(String path)
     {
+        DoctorFactory factory     = new DoctorFactory();
         ArrayList<Doctor> doctors = new ArrayList<>();
         
         try(CSVScanner scanner = new CSVScanner(new File(path), ",", "\"")) {
@@ -127,7 +119,7 @@ public class TestCSVFileIO {
                     String lastName    = scanner.next();
                     double consultRate = scanner.nextDouble();
                     
-                    Doctor d = createDoctor(scanner.next());
+                    Doctor d = factory.create(scanner.next(), firstName, lastName);
                     d.setConsultationRate(consultRate);
                     
                     System.out.printf("%s (PHP %.2f fee)\n", "Reading info for Dr." + firstName + " " 
@@ -152,7 +144,7 @@ public class TestCSVFileIO {
                     System.out.println("\tSchedule for Dr. " + 
                                        lastDoctorAdded.getFirstName() + " " +
                                        lastDoctorAdded.getLastName()  + " " +
-                                       sched.toString() + (isByAppt ? "By appointment" : ""));
+                                       sched.toString() + (isByAppt ? " By appointment" : ""));
                     
                     lastDoctorAdded.addSchedule(sched);
                 }

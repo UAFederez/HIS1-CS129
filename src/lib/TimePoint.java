@@ -35,6 +35,10 @@ public class TimePoint {
         return (hour < 10 ? "0" + hour : "" + hour);
     }
     
+    public boolean equals(TimePoint other) {
+        return hour == other.hour && minute == other.minute;
+    }
+    
     public String getMinuteString() {
         return (minute < 10 ? "0" + minute : "" + minute);
     }

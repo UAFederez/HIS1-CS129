@@ -56,6 +56,12 @@ public abstract class Doctor {
         this.consultationRate = newRate;
     }
     
+    public boolean equals(Doctor other) {
+        return firstName.equals(other.firstName) &&
+               lastName.equals(other.lastName)   &&
+               getSpecialization().equals(other.getSpecialization());
+    }
+    
     public abstract void    computeRate();
     public abstract String  getSpecialization();
 }
