@@ -9,23 +9,20 @@ package lib;
  *
  * @author uafederez
  */
-public class Cardiologist extends Doctor {
+public class Gastroentrologist extends Doctor {
 
-    public Cardiologist(String fName, String lName) {
+    public Gastroentrologist(String fName, String lName) {
         super(fName, lName);
     }
 
     @Override
     public void computeRate() {
-        int min = 450;
-        int max = 900;
-        
-        consultationRate = (min + randomGenerator.nextInt(max - min)) * (1 + 0.12);
+        consultationRate = (450 + randomGenerator.nextInt(700 - 450)) * (1 + 0.12);
     }
 
     @Override
     public String getSpecialization() {
-        return "Cardiology";
+        return "Gastroentrology";
     }
     
 }
