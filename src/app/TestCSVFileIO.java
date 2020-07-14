@@ -38,7 +38,7 @@ public class TestCSVFileIO {
         
         for(String spec : specializations)
         {
-            Doctor doctor = factory.create(spec, "fname", "lname (" + spec + ")");
+            Doctor doctor = factory.createDoctor(spec, "fname", "lname (" + spec + ")");
             
             int numSchedules = 2 + random.nextInt(3);
             for(int i = 0; i < numSchedules; ++i)
@@ -119,11 +119,11 @@ public class TestCSVFileIO {
                     String lastName    = scanner.next();
                     double consultRate = scanner.nextDouble();
                     
-                    Doctor d = factory.create(scanner.next(), firstName, lastName);
+                    Doctor d = factory.createDoctor(scanner.next(), firstName, lastName);
                     d.setConsultationRate(consultRate);
                     
-                    System.out.printf("%s (PHP %.2f fee)\n", "Reading info for Dr." + firstName + " " 
-                                                             + lastName, consultRate);
+                    //System.out.printf("%s (PHP %.2f fee)\n", "Reading info for Dr." + firstName + " " 
+                    //                                       + lastName, consultRate);
                     doctors.add(d);
                 } else 
                 {
@@ -141,10 +141,12 @@ public class TestCSVFileIO {
                     
                     Schedule sched = new Schedule(dayOfWeek, timeFrom, timeTo, isByAppt);
                     
+                    /**
                     System.out.println("\tSchedule for Dr. " + 
                                        lastDoctorAdded.getFirstName() + " " +
                                        lastDoctorAdded.getLastName()  + " " +
                                        sched.toString() + (isByAppt ? " By appointment" : ""));
+                    **/
                     
                     lastDoctorAdded.addSchedule(sched);
                 }

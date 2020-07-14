@@ -14,13 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
-import lib.Appointment;
-import lib.CSVScanner;
-import lib.Doctor;
-import lib.DoctorFactory;
-import lib.Patient;
-import lib.Schedule;
-import lib.TimePoint;
+import lib.*;
 
 /**
  *
@@ -80,6 +74,7 @@ public class TestAppointmentCLI {
                 }
             }
             System.out.print("Select a Doctor: ");
+            
             // Step 4: Select a schedule from that doctor
             Doctor selectedDoctor         = matchingDoctors.get(input.nextInt());
             ArrayList<Schedule> schedules = selectedDoctor.getSchedules();
@@ -117,7 +112,10 @@ public class TestAppointmentCLI {
             }
 
             if(hasAvailableSlot)
+            {
+                System.err.println("Successfully setup an appointment!");
                 appointments.add(newAppt);
+            }
             else
                 System.err.println("Sorry, no more slots left for sched: " + schedule.toString());
             
@@ -141,6 +139,8 @@ public class TestAppointmentCLI {
         ArrayList<Appointment> appointments = new ArrayList<>();
         
         File inputFile          = new File(path);
+        
+        System.out.println("Existing appointments in: " + path);
         try(CSVScanner inputCSV = new CSVScanner(inputFile))
         {
             while(inputCSV.hasNext())
@@ -155,7 +155,7 @@ public class TestAppointmentCLI {
                 String doctorLName    = inputCSV.next();
                 String specialization = inputCSV.next();
                 
-                Doctor doctorInCSV    = factory.create(specialization, doctorFName, doctorLName);
+                Doctor doctorInCSV    = factory.createDoctor(specialization, doctorFName, doctorLName);
                 Schedule schedInCSV   = new Schedule(inputCSV.next());
                 
                 Doctor   assocDoctor  = null;
@@ -187,13 +187,15 @@ public class TestAppointmentCLI {
         {
             System.err.println(e.getMessage());
         }
+        System.out.println("====================================================");
         
         return appointments;
     }
     
     private static void writeAppointmentsToCSV(ArrayList<Appointment> appointments)
     { 
-        try(PrintWriter outputCSV = new PrintWriter(new File("appointments.csv")))
+        File outputFile = new File("appointments.csv");
+        try(PrintWriter outputCSV = new PrintWriter(outputFile))
         {
             for(Appointment appt : appointments)
             {
@@ -214,6 +216,8 @@ public class TestAppointmentCLI {
                                   p.getFirstName(), p.getLastName(), p.getBirthday(),       p.getGender(),
                                   d.getFirstName(), d.getLastName(), d.getSpecialization(), csvSched);
             }
+            
+            System.out.println("Appointments have been written to " + outputFile.getName());
         } catch(IOException e)
         {
             System.err.println(e.getMessage());

@@ -10,7 +10,7 @@ package lib;
  * @author uafederez
  */
 public class DoctorFactory {
-    public Doctor create(String specialization, String fname, String lname)
+    public Doctor createDoctor(String specialization, String fname, String lname)
     {
         Doctor doctor = null;
         
