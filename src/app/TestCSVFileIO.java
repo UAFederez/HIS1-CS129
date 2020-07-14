@@ -15,6 +15,7 @@ import java.util.Random;
 import lib.Cardiologist;
 import lib.Doctor;
 import lib.DoctorFactory;
+import lib.HISDoctorFactory;
 import lib.Schedule;
 import lib.TimePoint;
 
@@ -33,12 +34,12 @@ public class TestCSVFileIO {
     
     private static ArrayList<Doctor> createTestDoctors(String[] specializations)
     {
-        DoctorFactory  factory        = new DoctorFactory();
+        DoctorFactory  factory        = new HISDoctorFactory();
         ArrayList<Doctor> testDoctors = new ArrayList<>();
         
         for(String spec : specializations)
         {
-            Doctor doctor = factory.createDoctor(spec, "fname", "lname (" + spec + ")");
+            Doctor doctor = factory.createDoctor(spec, "fname", "lname (" + spec + ")", null);
             
             int numSchedules = 2 + random.nextInt(3);
             for(int i = 0; i < numSchedules; ++i)
@@ -103,7 +104,7 @@ public class TestCSVFileIO {
     
     public static ArrayList<Doctor> readDoctorsFromCSV(String path)
     {
-        DoctorFactory factory     = new DoctorFactory();
+        DoctorFactory factory     = new HISDoctorFactory();
         ArrayList<Doctor> doctors = new ArrayList<>();
         
         try(CSVScanner scanner = new CSVScanner(new File(path), ",", "\"")) {
@@ -119,7 +120,7 @@ public class TestCSVFileIO {
                     String lastName    = scanner.next();
                     double consultRate = scanner.nextDouble();
                     
-                    Doctor d = factory.createDoctor(scanner.next(), firstName, lastName);
+                    Doctor d = factory.createDoctor(scanner.next(), firstName, lastName, null);
                     d.setConsultationRate(consultRate);
                     
                     //System.out.printf("%s (PHP %.2f fee)\n", "Reading info for Dr." + firstName + " " 

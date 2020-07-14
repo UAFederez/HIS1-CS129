@@ -134,7 +134,7 @@ public class TestAppointmentCLI {
      */
     private static ArrayList<Appointment> readAppointmentsFromCSV(String path, ArrayList<Doctor> doctors)
     {
-        DoctorFactory factory   = new DoctorFactory();
+        DoctorFactory factory   = new HISDoctorFactory();
         
         ArrayList<Appointment> appointments = new ArrayList<>();
         
@@ -155,7 +155,7 @@ public class TestAppointmentCLI {
                 String doctorLName    = inputCSV.next();
                 String specialization = inputCSV.next();
                 
-                Doctor doctorInCSV    = factory.createDoctor(specialization, doctorFName, doctorLName);
+                Doctor doctorInCSV    = factory.createDoctor(specialization, doctorFName, doctorLName, null);
                 Schedule schedInCSV   = new Schedule(inputCSV.next());
                 
                 Doctor   assocDoctor  = null;
