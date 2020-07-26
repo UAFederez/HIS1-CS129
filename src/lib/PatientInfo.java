@@ -12,6 +12,7 @@ import java.util.Date;
  * @author uafederez
  */
 public class PatientInfo {
+    
     private final String firstName;
     private final String lastName;
     
@@ -26,7 +27,7 @@ public class PatientInfo {
         this.birthday  = bday;
         this.gender    = gender;
     }
-   
+    
     public String getFirstName() {
         return firstName;
     }

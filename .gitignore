@@ -1,3 +1,2 @@
 /dist/
-appointments.csv
-csvtest.csv
+*.csv

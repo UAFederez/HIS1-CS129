@@ -28,6 +28,16 @@ public class Appointment {
         this.apptDate       = date;
     }
     
+    public Date getDate()
+    {
+        return apptDate;
+    }
+    
+    public String getNote()
+    {
+        return additionalNote;
+    }
+    
     public PatientInfo getPatient() {
         return patient;
     }

@@ -6,6 +6,7 @@
 package app;
 
 import app.patient.PatientRequestAppointment;
+import app.patient.PatientViewAppointments;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -14,15 +15,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import lib.Appointment;
-import lib.CSVScanner;
-import lib.Cardiologist;
-import lib.Doctor;
-import lib.DoctorFactory;
-import lib.HISDoctorFactory;
-import lib.PatientInfo;
-import lib.Schedule;
-import lib.TimePoint;
+import lib.*;
 
 /**
  *
@@ -31,12 +24,17 @@ import lib.TimePoint;
 public class MainMenu extends javax.swing.JFrame {
 
     private static final SimpleDateFormat  dateFormat   = new SimpleDateFormat("yyyy-MM-dd");
-    ArrayList<Doctor>      doctorData       = readDoctorsFromCSV("csvtest.csv");
-    ArrayList<Appointment> appointmentsData = readAppointmentsFromCSV("appointments.csv", doctorData);
+    
+    private Account currentLoggedInAcc = null;
+    
+    ArrayList<PatientInfo> patientData;
+    ArrayList<Doctor>      doctorData;
+    ArrayList<Appointment> appointmentsData;
     
     // JFrame Forms
     SearchDoctorGUI           searchDoctor = new SearchDoctorGUI();
     PatientRequestAppointment pReqAppt     = new PatientRequestAppointment();
+    PatientViewAppointments   pViewAppt    = new PatientViewAppointments();
     
     /**
      * Creates new form PatientMainMenu
@@ -44,8 +42,76 @@ public class MainMenu extends javax.swing.JFrame {
     public MainMenu() {
         initComponents();
         
+    }
+    
+    public void setAccount(Account loggedIn)
+    {
+        this.currentLoggedInAcc = loggedIn;
+        accountNameLabel.setText(currentLoggedInAcc.getUserName());
+        currentDateLabel.setText(dateFormat.format(new Date()));
+        
+        // Set current viewing patient (for view appointments module)
+        
+        switch(currentLoggedInAcc.getPermission())
+        {
+            case Account.ADMIN:
+            {
+                patientOptionsPanel.setVisible(false);
+                adminOptionsPanel.setVisible(true);
+                doctorOptionsPanel.setVisible(false);
+            }
+            break;
+            case Account.DOCTOR:
+            {
+                patientOptionsPanel.setVisible(false);
+                adminOptionsPanel.setVisible(false);
+                doctorOptionsPanel.setVisible(true);
+            }
+            break;
+            case Account.PATIENT:
+            {
+                System.out.printf("PATIENT\n");
+                for(PatientInfo p : patientData)
+                {
+                    String name = p.getFirstName() + " " + p.getLastName();
+                    
+                    System.out.printf("comparing %s to %s\n", name, currentLoggedInAcc.getName());
+                    if(currentLoggedInAcc.getName().equals(name))
+                    {
+                        System.out.println("found PATIENT match!!");
+                        pReqAppt.setCurrentPatient(p);
+                    }
+                }
+                
+                pViewAppt.setAccountFilter(currentLoggedInAcc.getName());
+                System.out.println("patient" + currentLoggedInAcc.getName());
+                
+                patientOptionsPanel.setVisible(true);
+                adminOptionsPanel.setVisible(false);
+                doctorOptionsPanel.setVisible(false);
+            }
+            break;
+        }
+        pack();
+        setLocationRelativeTo(null);
+    }
+    
+    // Functions to Link the data from the files
+    public void setDoctors(ArrayList<Doctor> doctors) {
+        this.doctorData = doctors;
         pReqAppt.setDoctors(doctorData);
         searchDoctor.setDoctors(doctorData);
+    }
+    
+    public void setAppointments(ArrayList<Appointment> appointments) {
+        this.appointmentsData = appointments;
+        pViewAppt.setAppointments(appointments);
+        pReqAppt.setAppointments(appointments);
+    }
+    
+    public void setPatients(ArrayList<PatientInfo> patients){
+        this.patientData = patients;
+        
     }
 
     /**
@@ -90,6 +156,11 @@ public class MainMenu extends javax.swing.JFrame {
         });
 
         jButton2.setText("View My Appointments");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                patientViewApptsAction(evt);
+            }
+        });
 
         jButton4.setText("View Doctors' Information");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -281,13 +352,13 @@ public class MainMenu extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(patientOptionsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(doctorOptionsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(adminOptionsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(14, 14, 14))
         );
 
         pack();
@@ -303,6 +374,11 @@ public class MainMenu extends javax.swing.JFrame {
         pReqAppt.getSearchPanel().refreshResultsTable();
         pReqAppt.setVisible(true);
     }//GEN-LAST:event_reqConsultationBtnAction
+
+    private void patientViewApptsAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientViewApptsAction
+        pViewAppt.setVisible(true);
+        pViewAppt.refreshTable();
+    }//GEN-LAST:event_patientViewApptsAction
 
     
     // TODO: probably encapsulate this in a CSVWriter since we have a CSVScanner, but
@@ -468,37 +544,6 @@ public class MainMenu extends javax.swing.JFrame {
         return appointments;
     }
     
-    private static void writeAppointmentsToCSV(ArrayList<Appointment> appointments)
-    { 
-        File outputFile = new File("appointments.csv");
-        try(PrintWriter outputCSV = new PrintWriter(outputFile))
-        {
-            for(Appointment appt : appointments)
-            {
-                PatientInfo  p = appt.getPatient();
-                Doctor   d = appt.getDoctor();
-                Schedule s = appt.getSchedule();
-                
-                String csvSched = s.getDay() + " " + s.getTimeFrom().getHourString()   + ":" +
-                                                     s.getTimeFrom().getMinuteString() + "-" +
-                                                     s.getTimeTo().getHourString()     + ":" +
-                                                     s.getTimeTo().getMinuteString();
-                                               
-                outputCSV.printf("%s,%s,\"%s\",%s,%s,%s,%s,%s\n", 
-                                  p.getFirstName(), p.getLastName(), dateFormat.format(p.getBirthday()),       
-                                  p.getGender(),         d.getFirstName(), d.getLastName(), 
-                                  d.getSpecialization(), csvSched);
-                System.out.printf("%s,%s,\"%s\",%s,%s,%s,%s,%s\n", 
-                                  p.getFirstName(), p.getLastName(), p.getBirthday(),       p.getGender(),
-                                  d.getFirstName(), d.getLastName(), d.getSpecialization(), csvSched);
-            }
-            
-            System.out.println("Appointments have been written to " + outputFile.getName());
-        } catch(IOException e)
-        {
-            System.err.println(e.getMessage());
-        }
-    }
     
     /**
      * @param args the command line arguments

@@ -7,6 +7,9 @@ package app.patient;
 
 import app.SearchDoctorPanel;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -30,8 +33,10 @@ import lib.Schedule;
 public class PatientRequestAppointment extends javax.swing.JFrame {
 
     private ArrayList<Appointment> appointments;
-    private Doctor selectedDoctor = null;
-    private SimpleDateFormat sdf  = new SimpleDateFormat("MMM-d-yyyy");
+    private Doctor      selectedDoctor = null;
+    private PatientInfo currentPatient = null;
+    private static final SimpleDateFormat sdf        = new SimpleDateFormat("MMM-d-yyyy");
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     /**
      * Creates new form PatientRequestAppointment
      */
@@ -61,7 +66,13 @@ public class PatientRequestAppointment extends javax.swing.JFrame {
     
     public void setAppointments(ArrayList<Appointment> appointments)
     {
-        this.appointments = this.appointments;
+        this.appointments = appointments;
+    }
+    
+    public void setCurrentPatient(PatientInfo currentPatient)
+    {
+        this.currentPatient = currentPatient;
+        System.out.println("Current patient: " + currentPatient);
     }
     
     private void updateSchedulesList()
@@ -258,12 +269,14 @@ public class PatientRequestAppointment extends javax.swing.JFrame {
         
         Appointment appt;
         try {
-            appt = new Appointment(new PatientInfo("fname", "lname", new Date(), "male"), 
-                    selectedDoctor,
+            System.out.println("Writing appointment for patient: " + currentPatient.toString());
+            appt = new Appointment(currentPatient, selectedDoctor,
                     selectedDoctor.getSchedules().get(scheduleList.getSelectedIndex()),
                     noteText,
                     sdf.parse(dateList.getSelectedValue()));
             appointments.add(appt);
+            System.out.println("Appointments: " + appointments.size());
+            writeAppointmentsToCSV();
             
             JOptionPane.showMessageDialog(null, "Successfully added Appointment");
         } catch (ParseException ex) {
@@ -272,6 +285,52 @@ public class PatientRequestAppointment extends javax.swing.JFrame {
         
     }//GEN-LAST:event_reqApptBtnActionPerformed
 
+    private void writeAppointmentsToCSV()
+    { 
+        File outputFile = new File("appointments.csv");
+        try(PrintWriter outputCSV = new PrintWriter(outputFile))
+        {
+            for(Appointment appt : appointments)
+            {
+                PatientInfo  p = appt.getPatient();
+                Doctor   d = appt.getDoctor();
+                Schedule s = appt.getSchedule();
+                
+                String csvSched = s.getDay() + " " + s.getTimeFrom().getHourString()   + ":" +
+                                                     s.getTimeFrom().getMinuteString() + "-" +
+                                                     s.getTimeTo().getHourString()     + ":" +
+                                                     s.getTimeTo().getMinuteString();
+                                               
+                outputCSV.printf("%s,%s,\"%s\",%s,%s,%s,%s,%s,%s,\"%s\"\n", 
+                                  p.getFirstName(), 
+                                  p.getLastName(), 
+                                  dateFormat.format(p.getBirthday()),       
+                                  p.getGender(),         
+                                  d.getFirstName(), 
+                                  d.getLastName(), 
+                                  d.getSpecialization(), 
+                                  csvSched,
+                                  dateFormat.format(appt.getDate()),
+                                  appt.getNote());
+                System.out.printf("%s,%s,\"%s\",%s,%s,%s,%s,%s,%s,\"%s\"\n", 
+                                  p.getFirstName(), 
+                                  p.getLastName(), 
+                                  dateFormat.format(p.getBirthday()),       
+                                  p.getGender(),         
+                                  d.getFirstName(), 
+                                  d.getLastName(), 
+                                  d.getSpecialization(), 
+                                  csvSched,
+                                  dateFormat.format(appt.getDate()),
+                                  appt.getNote());
+            }
+            
+            System.out.println("Appointments have been written to " + outputFile.getName());
+        } catch(IOException e)
+        {
+            System.err.println(e.getMessage());
+        }
+    }
     /**
      * @param args the command line arguments
      */
