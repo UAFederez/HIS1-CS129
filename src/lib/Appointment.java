@@ -17,8 +17,9 @@ public class Appointment {
     private final Doctor       doctor;
     private final Schedule     schedule;
     private final String       additionalNote;
-    private final Date         apptDate;
-    
+    private Date               apptDate;
+    private TimePoint          timeStart;
+
     public Appointment(PatientInfo patient, Doctor doctor, Schedule schedule, String note, Date date)
     {
         this.patient        = patient;
@@ -31,6 +32,20 @@ public class Appointment {
     public Date getDate()
     {
         return apptDate;
+    }
+    
+    public TimePoint getTimeStart() {
+        return timeStart;
+    }
+
+    public void setTimeStart(TimePoint timeStart) {
+        this.timeStart = timeStart;
+    }
+    
+    
+    public void setDate(Date newDate)
+    {
+        this.apptDate = newDate;
     }
     
     public String getNote()

@@ -5,6 +5,7 @@
  */
 package app.patient;
 
+import app.MainGUI;
 import app.SearchDoctorPanel;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -276,7 +277,7 @@ public class PatientRequestAppointment extends javax.swing.JFrame {
                     sdf.parse(dateList.getSelectedValue()));
             appointments.add(appt);
             System.out.println("Appointments: " + appointments.size());
-            writeAppointmentsToCSV();
+            MainGUI.writeAppointmentsToCSV(appointments);
             
             JOptionPane.showMessageDialog(null, "Successfully added Appointment");
         } catch (ParseException ex) {
@@ -285,52 +286,7 @@ public class PatientRequestAppointment extends javax.swing.JFrame {
         
     }//GEN-LAST:event_reqApptBtnActionPerformed
 
-    private void writeAppointmentsToCSV()
-    { 
-        File outputFile = new File("appointments.csv");
-        try(PrintWriter outputCSV = new PrintWriter(outputFile))
-        {
-            for(Appointment appt : appointments)
-            {
-                PatientInfo  p = appt.getPatient();
-                Doctor   d = appt.getDoctor();
-                Schedule s = appt.getSchedule();
-                
-                String csvSched = s.getDay() + " " + s.getTimeFrom().getHourString()   + ":" +
-                                                     s.getTimeFrom().getMinuteString() + "-" +
-                                                     s.getTimeTo().getHourString()     + ":" +
-                                                     s.getTimeTo().getMinuteString();
-                                               
-                outputCSV.printf("%s,%s,\"%s\",%s,%s,%s,%s,%s,%s,\"%s\"\n", 
-                                  p.getFirstName(), 
-                                  p.getLastName(), 
-                                  dateFormat.format(p.getBirthday()),       
-                                  p.getGender(),         
-                                  d.getFirstName(), 
-                                  d.getLastName(), 
-                                  d.getSpecialization(), 
-                                  csvSched,
-                                  dateFormat.format(appt.getDate()),
-                                  appt.getNote());
-                System.out.printf("%s,%s,\"%s\",%s,%s,%s,%s,%s,%s,\"%s\"\n", 
-                                  p.getFirstName(), 
-                                  p.getLastName(), 
-                                  dateFormat.format(p.getBirthday()),       
-                                  p.getGender(),         
-                                  d.getFirstName(), 
-                                  d.getLastName(), 
-                                  d.getSpecialization(), 
-                                  csvSched,
-                                  dateFormat.format(appt.getDate()),
-                                  appt.getNote());
-            }
-            
-            System.out.println("Appointments have been written to " + outputFile.getName());
-        } catch(IOException e)
-        {
-            System.err.println(e.getMessage());
-        }
-    }
+    
     /**
      * @param args the command line arguments
      */

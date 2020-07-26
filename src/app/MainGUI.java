@@ -96,7 +96,56 @@ public class MainGUI extends javax.swing.JFrame {
         return patients;
     }
     
-    private static void writeAccountsToCSV(ArrayList<Account> accounts, String path)
+    public static void writeAppointmentsToCSV(ArrayList<Appointment> appointments)
+    { 
+        File outputFile = new File("appointments.csv");
+        try(PrintWriter outputCSV = new PrintWriter(outputFile))
+        {
+            for(Appointment appt : appointments)
+            {
+                PatientInfo  p = appt.getPatient();
+                Doctor   d = appt.getDoctor();
+                Schedule s = appt.getSchedule();
+                
+                String csvSched = s.getDay() + " " + s.getTimeFrom().getHourString()   + ":" +
+                                                     s.getTimeFrom().getMinuteString() + "-" +
+                                                     s.getTimeTo().getHourString()     + ":" +
+                                                     s.getTimeTo().getMinuteString();
+                                               
+                outputCSV.printf("%s,%s,\"%s\",%s,%s,%s,%s,%s,%s,%s,\"%s\"\n", 
+                                  p.getFirstName(), 
+                                  p.getLastName(), 
+                                  dateFormat.format(p.getBirthday()),       
+                                  p.getGender(),         
+                                  d.getFirstName(), 
+                                  d.getLastName(), 
+                                  d.getSpecialization(), 
+                                  csvSched,
+                                  dateFormat.format(appt.getDate()),
+                                  (appt.getTimeStart() == null ? "null" : appt.getTimeStart().getHour() + ":" + appt.getTimeStart().getMinute()),
+                                  appt.getNote());
+                System.out.printf("%s,%s,\"%s\",%s,%s,%s,%s,%s,%s,%s,\"%s\"\n", 
+                                  p.getFirstName(), 
+                                  p.getLastName(), 
+                                  dateFormat.format(p.getBirthday()),       
+                                  p.getGender(),         
+                                  d.getFirstName(), 
+                                  d.getLastName(), 
+                                  d.getSpecialization(), 
+                                  csvSched,
+                                  dateFormat.format(appt.getDate()),
+                                  (appt.getTimeStart() == null ? "null" : appt.getTimeStart().getHour() + ":" + appt.getTimeStart().getMinute()),
+                                  appt.getNote());
+            }
+            
+            System.out.println("Appointments have been written to " + outputFile.getName());
+        } catch(IOException e)
+        {
+            System.err.println(e.getMessage());
+        }
+    }
+    
+    public static void writeAccountsToCSV(ArrayList<Account> accounts, String path)
     {
         File outputFile = new File(path);
         
@@ -147,6 +196,7 @@ public class MainGUI extends javax.swing.JFrame {
         mainMenu.setPatients(patientData);
         mainMenu.setDoctors(doctorData);
         mainMenu.setAppointments(appointmentsData);
+        mainMenu.setAccounts(accounts);
     }
 
     /**
@@ -475,6 +525,16 @@ public class MainGUI extends javax.swing.JFrame {
                 Schedule assocSched   = null;
                 
                 Date   apptDate       = dateFormat.parse(inputCSV.next());
+                
+                String timeStartStr   = inputCSV.next();
+                TimePoint timeStart   = null;
+                
+                if(!timeStartStr.equals("null"))
+                {
+                    String[] timeString = timeStartStr.split(":");
+                    timeStart = new TimePoint(Integer.parseInt(timeString[0]), 
+                                              Integer.parseInt(timeString[1]));
+                }
                 String note           = inputCSV.next();
                 
                 
@@ -498,7 +558,10 @@ public class MainGUI extends javax.swing.JFrame {
                     }
                 }
                 
-                appointments.add(new Appointment(patient, assocDoctor, assocSched, note, apptDate));
+                Appointment appt = new Appointment(patient, assocDoctor, assocSched, note, apptDate);
+                appt.setTimeStart(timeStart);
+                
+                appointments.add(appt);
             }
         } catch(IOException | ParseException e)
         {

@@ -45,13 +45,13 @@ public class PatientViewAppointments extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Doctor's Name", "Specialization", "Date Scheduled", "Additional Note"
+                "Doctor's Name", "Specialization", "Date Scheduled", "Time Scheduled", "Additional Note"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -121,6 +121,8 @@ public class PatientViewAppointments extends javax.swing.JFrame {
                     appt.getDoctor().getLastName() + ", " + appt.getDoctor().getFirstName(),
                     appt.getDoctor().getSpecialization(),
                     appt.getDate(),
+                    (appt.getTimeStart() != null ? appt.getTimeStart().getHourString() + ":" + appt.getTimeStart().getMinuteString(): 
+                                                   "Not yet scheduled"),
                     appt.getNote()
                 });
             }

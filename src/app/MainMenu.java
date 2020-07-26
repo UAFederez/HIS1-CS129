@@ -5,6 +5,8 @@
  */
 package app;
 
+import app.admin.FormAddDoctor;
+import app.doctor.DocManageAppointments;
 import app.patient.PatientRequestAppointment;
 import app.patient.PatientViewAppointments;
 import java.io.File;
@@ -27,14 +29,21 @@ public class MainMenu extends javax.swing.JFrame {
     
     private Account currentLoggedInAcc = null;
     
-    ArrayList<PatientInfo> patientData;
+    ArrayList<Account>     accountData;
     ArrayList<Doctor>      doctorData;
+    ArrayList<PatientInfo> patientData;
     ArrayList<Appointment> appointmentsData;
     
-    // JFrame Forms
-    SearchDoctorGUI           searchDoctor = new SearchDoctorGUI();
-    PatientRequestAppointment pReqAppt     = new PatientRequestAppointment();
-    PatientViewAppointments   pViewAppt    = new PatientViewAppointments();
+    // JFrame Forms (Patient)
+    SearchDoctorGUI           searchDoctorForm  = new SearchDoctorGUI();
+    PatientRequestAppointment pReqApptForm      = new PatientRequestAppointment();
+    PatientViewAppointments   pViewApptForm     = new PatientViewAppointments();
+    
+    // JFrame Forms (Admin)
+    FormAddDoctor             addDoctorForm     = new FormAddDoctor();
+    
+    // JFrame Forms (Doctor)
+    DocManageAppointments     manageApptsForm   = new DocManageAppointments();
     
     /**
      * Creates new form PatientMainMenu
@@ -59,6 +68,10 @@ public class MainMenu extends javax.swing.JFrame {
                 patientOptionsPanel.setVisible(false);
                 adminOptionsPanel.setVisible(true);
                 doctorOptionsPanel.setVisible(false);
+                
+                addDoctorForm.setDoctors(doctorData);
+                
+                setTitle("Admin Main Menu");
             }
             break;
             case Account.DOCTOR:
@@ -66,6 +79,19 @@ public class MainMenu extends javax.swing.JFrame {
                 patientOptionsPanel.setVisible(false);
                 adminOptionsPanel.setVisible(false);
                 doctorOptionsPanel.setVisible(true);
+                
+                manageApptsForm.setAppointments(appointmentsData);
+                
+                for(Doctor d : doctorData)
+                {
+                    String name = d.getFirstName() + " " + d.getLastName();
+                    
+                    if(name.equals(currentLoggedInAcc.getName()))
+                        manageApptsForm.getAppointmentsPanel().setDoctorFilter(d);
+                }
+                manageApptsForm.getAppointmentsPanel().refreshTable(); 
+                
+                setTitle("Doctor Main Menu");
             }
             break;
             case Account.PATIENT:
@@ -79,16 +105,17 @@ public class MainMenu extends javax.swing.JFrame {
                     if(currentLoggedInAcc.getName().equals(name))
                     {
                         System.out.println("found PATIENT match!!");
-                        pReqAppt.setCurrentPatient(p);
+                        pReqApptForm.setCurrentPatient(p);
                     }
                 }
                 
-                pViewAppt.setAccountFilter(currentLoggedInAcc.getName());
-                System.out.println("patient" + currentLoggedInAcc.getName());
+                pViewApptForm.setAccountFilter(currentLoggedInAcc.getName());
                 
                 patientOptionsPanel.setVisible(true);
                 adminOptionsPanel.setVisible(false);
                 doctorOptionsPanel.setVisible(false);
+                
+                setTitle("Patient Main Menu");
             }
             break;
         }
@@ -99,14 +126,19 @@ public class MainMenu extends javax.swing.JFrame {
     // Functions to Link the data from the files
     public void setDoctors(ArrayList<Doctor> doctors) {
         this.doctorData = doctors;
-        pReqAppt.setDoctors(doctorData);
-        searchDoctor.setDoctors(doctorData);
+        pReqApptForm.setDoctors(doctorData);
+        searchDoctorForm.setDoctors(doctorData);
+    }
+    
+    public void setAccounts(ArrayList<Account> accounts) {
+        this.accountData = accounts;
+        addDoctorForm.setAccounts(accounts);
     }
     
     public void setAppointments(ArrayList<Appointment> appointments) {
         this.appointmentsData = appointments;
-        pViewAppt.setAppointments(appointments);
-        pReqAppt.setAppointments(appointments);
+        pViewApptForm.setAppointments(appointments);
+        pReqApptForm.setAppointments(appointments);
     }
     
     public void setPatients(ArrayList<PatientInfo> patients){
@@ -135,7 +167,6 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         doctorOptionsPanel = new javax.swing.JPanel();
         jButton5 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         adminOptionsPanel = new javax.swing.JPanel();
         jButton10 = new javax.swing.JButton();
@@ -197,7 +228,7 @@ public class MainMenu extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel2.setBackground(new java.awt.Color(102, 153, 255));
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Logged in as: ");
@@ -256,8 +287,11 @@ public class MainMenu extends javax.swing.JFrame {
 
         jButton5.setText("Manage My Appointments");
         jButton5.setToolTipText("");
-
-        jButton7.setText("View Consultation History");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manageApptsAction(evt);
+            }
+        });
 
         jButton8.setText("View Doctors' Information");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -272,14 +306,9 @@ public class MainMenu extends javax.swing.JFrame {
             doctorOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(doctorOptionsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(doctorOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(doctorOptionsPanelLayout.createSequentialGroup()
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(doctorOptionsPanelLayout.createSequentialGroup()
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         doctorOptionsPanelLayout.setVerticalGroup(
@@ -288,15 +317,18 @@ public class MainMenu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(doctorOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton5)
-                    .addComponent(jButton7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton8)
+                    .addComponent(jButton8))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         adminOptionsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("What do you want to do?"));
 
         jButton10.setText("Add Doctor to Database");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addDoctorAction(evt);
+            }
+        });
 
         jButton11.setText("View Doctors' Information");
         jButton11.addActionListener(new java.awt.event.ActionListener() {
@@ -366,19 +398,28 @@ public class MainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void viewDoctorInfoAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDoctorInfoAction
-        searchDoctor.getSearchPanel().refreshResultsTable();
-        searchDoctor.setVisible(true);
+        searchDoctorForm.getSearchPanel().refreshResultsTable();
+        searchDoctorForm.setVisible(true);
     }//GEN-LAST:event_viewDoctorInfoAction
 
     private void reqConsultationBtnAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reqConsultationBtnAction
-        pReqAppt.getSearchPanel().refreshResultsTable();
-        pReqAppt.setVisible(true);
+        pReqApptForm.getSearchPanel().refreshResultsTable();
+        pReqApptForm.setVisible(true);
     }//GEN-LAST:event_reqConsultationBtnAction
 
     private void patientViewApptsAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientViewApptsAction
-        pViewAppt.setVisible(true);
-        pViewAppt.refreshTable();
+        pViewApptForm.setVisible(true);
+        pViewApptForm.refreshTable();
     }//GEN-LAST:event_patientViewApptsAction
+
+    private void addDoctorAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDoctorAction
+        addDoctorForm.setVisible(true);
+    }//GEN-LAST:event_addDoctorAction
+
+    private void manageApptsAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageApptsAction
+        manageApptsForm.getAppointmentsPanel().refreshTable();
+        manageApptsForm.setVisible(true);
+    }//GEN-LAST:event_manageApptsAction
 
     
     // TODO: probably encapsulate this in a CSVWriter since we have a CSVScanner, but
@@ -593,7 +634,6 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
