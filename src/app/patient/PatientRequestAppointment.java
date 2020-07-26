@@ -5,10 +5,23 @@
  */
 package app.patient;
 
+import app.SearchDoctorPanel;
+import java.awt.event.WindowEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import lib.Appointment;
 import lib.Doctor;
+import lib.PatientInfo;
+import lib.Schedule;
 
 /**
  *
@@ -16,7 +29,9 @@ import lib.Doctor;
  */
 public class PatientRequestAppointment extends javax.swing.JFrame {
 
+    private ArrayList<Appointment> appointments;
     private Doctor selectedDoctor = null;
+    private SimpleDateFormat sdf  = new SimpleDateFormat("MMM-d-yyyy");
     /**
      * Creates new form PatientRequestAppointment
      */
@@ -28,9 +43,79 @@ public class PatientRequestAppointment extends javax.swing.JFrame {
                 @Override
                 public void valueChanged(ListSelectionEvent lse) {
                     selectedDoctor = searchDoctor1.getSelectedDoctor();
+                    
+                    updateLists();
+                    
+                    // TODO: change to validated
                     reqApptBtn.setEnabled(selectedDoctor != null);
                 }
         });
+        
+        scheduleList.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent lse) {
+                updateDatesList();
+            }
+        });
+    }
+    
+    public void setAppointments(ArrayList<Appointment> appointments)
+    {
+        this.appointments = this.appointments;
+    }
+    
+    private void updateSchedulesList()
+    {
+        // Update the schedules JList
+        DefaultListModel schedules = new DefaultListModel();
+        
+        if(selectedDoctor != null)
+        {
+            for(Schedule s : selectedDoctor.getSchedules())
+                schedules.addElement(s.toString());
+        }
+        
+        scheduleList.setModel(schedules);
+        scheduleList.setSelectedIndex(0);
+    }
+    
+    private void updateDatesList()
+    {
+        // Update the dates jList
+        int selectedIndex         = scheduleList.getSelectedIndex();
+        DefaultListModel dates    = new DefaultListModel();
+        
+        if(selectedIndex != -1 && selectedDoctor != null)
+        {
+            Schedule selectedSchedule = selectedDoctor.getSchedules().get(selectedIndex);
+
+            Date[]   dateOptions   = new Date[4];
+            Date     dateToday     = new Date();
+            Calendar dateIncrement = Calendar.getInstance();
+
+
+            for(int i = 0, j = 0; i < 30 && j < 4; ++i)
+            {
+                dateIncrement.add(Calendar.DATE, 1);     // Increment calendar by one day
+
+                // -2 because DAY_OF_WEEK is Sun - 1, Sat 7 while our date system
+                // is Monday - 0, Sunday - 6
+                if(dateIncrement.get(Calendar.DAY_OF_WEEK) - 2 == selectedSchedule.getDay())
+                {
+                    dateOptions[j++] = dateIncrement.getTime();
+                    dates.addElement(sdf.format(dateIncrement.getTime()));
+                }
+            }
+        }
+        
+        dateList.setModel(dates);
+        dateList.setSelectedIndex(0);
+    }
+    
+    private void updateLists()
+    {
+        updateSchedulesList();
+        updateDatesList();
     }
     
     
@@ -38,7 +123,11 @@ public class PatientRequestAppointment extends javax.swing.JFrame {
     {
         searchDoctor1.setDoctors(doctors);
     }
-
+    
+    public SearchDoctorPanel getSearchPanel()
+    {
+        return searchDoctor1;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -49,11 +138,22 @@ public class PatientRequestAppointment extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
+        searchDocPanel = new javax.swing.JPanel();
         reqApptBtn = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        scheduleList = new javax.swing.JList<>();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        dateList = new javax.swing.JList<>();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        infoTxtArea = new javax.swing.JTextArea();
+        jLabel3 = new javax.swing.JLabel();
         searchDoctor1 = new app.SearchDoctorPanel();
 
         setTitle("Book for a Consultation");
+
+        searchDocPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Appointment Details"));
 
         reqApptBtn.setText("Request Appointment");
         reqApptBtn.setEnabled(false);
@@ -63,23 +163,70 @@ public class PatientRequestAppointment extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(624, Short.MAX_VALUE)
-                .addComponent(reqApptBtn)
-                .addGap(19, 19, 19))
-            .addComponent(searchDoctor1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(searchDoctor1, javax.swing.GroupLayout.PREFERRED_SIZE, 576, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(reqApptBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+        jScrollPane1.setViewportView(scheduleList);
+
+        jLabel1.setText("Select Preferred Schedule");
+
+        jScrollPane2.setViewportView(dateList);
+
+        jLabel2.setText("Select Preferred Date");
+
+        infoTxtArea.setColumns(20);
+        infoTxtArea.setLineWrap(true);
+        infoTxtArea.setRows(5);
+        infoTxtArea.setText("Enter symptoms, pains or condition that you are currently experiencing");
+        infoTxtArea.setWrapStyleWord(true);
+        jScrollPane3.setViewportView(infoTxtArea);
+
+        jLabel3.setText("Enter additional Info");
+
+        javax.swing.GroupLayout searchDocPanelLayout = new javax.swing.GroupLayout(searchDocPanel);
+        searchDocPanel.setLayout(searchDocPanelLayout);
+        searchDocPanelLayout.setHorizontalGroup(
+            searchDocPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(searchDocPanelLayout.createSequentialGroup()
+                .addGroup(searchDocPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchDocPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(searchDocPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(searchDocPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(searchDocPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(51, 51, 51))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(searchDocPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+                            .addGroup(searchDocPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchDocPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(reqApptBtn)))
                 .addContainerGap())
+        );
+        searchDocPanelLayout.setVerticalGroup(
+            searchDocPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(searchDocPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(searchDocPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(searchDocPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(searchDocPanelLayout.createSequentialGroup()
+                        .addGroup(searchDocPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(searchDocPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2)
+                            .addComponent(jScrollPane3))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(reqApptBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -88,14 +235,16 @@ public class PatientRequestAppointment extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(searchDocPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(searchDoctor1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(searchDoctor1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(searchDocPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -104,7 +253,23 @@ public class PatientRequestAppointment extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void reqApptBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reqApptBtnActionPerformed
-       // TODO: Book appointment
+        //TODO: Input validation
+        String noteText = infoTxtArea.getText().replace("\n", " ");
+        
+        Appointment appt;
+        try {
+            appt = new Appointment(new PatientInfo("fname", "lname", new Date(), "male"), 
+                    selectedDoctor,
+                    selectedDoctor.getSchedules().get(scheduleList.getSelectedIndex()),
+                    noteText,
+                    sdf.parse(dateList.getSelectedValue()));
+            appointments.add(appt);
+            
+            JOptionPane.showMessageDialog(null, "Successfully added Appointment");
+        } catch (ParseException ex) {
+            Logger.getLogger(PatientRequestAppointment.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_reqApptBtnActionPerformed
 
     /**
@@ -143,8 +308,17 @@ public class PatientRequestAppointment extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JList<String> dateList;
+    private javax.swing.JTextArea infoTxtArea;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton reqApptBtn;
+    private javax.swing.JList<String> scheduleList;
+    private javax.swing.JPanel searchDocPanel;
     private app.SearchDoctorPanel searchDoctor1;
     // End of variables declaration//GEN-END:variables
 }

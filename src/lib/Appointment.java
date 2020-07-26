@@ -13,18 +13,22 @@ import java.util.Date;
  */
 public class Appointment {
     
-    private final Patient  patient;
-    private final Doctor   doctor;
-    private final Schedule schedule;
+    private final PatientInfo  patient;
+    private final Doctor       doctor;
+    private final Schedule     schedule;
+    private final String       additionalNote;
+    private final Date         apptDate;
     
-    public Appointment(Patient patient, Doctor doctor, Schedule schedule)
+    public Appointment(PatientInfo patient, Doctor doctor, Schedule schedule, String note, Date date)
     {
-        this.patient  = patient;
-        this.doctor   = doctor;
-        this.schedule = schedule;
+        this.patient        = patient;
+        this.doctor         = doctor;
+        this.schedule       = schedule;
+        this.additionalNote = note;
+        this.apptDate       = date;
     }
     
-    public Patient getPatient() {
+    public PatientInfo getPatient() {
         return patient;
     }
 

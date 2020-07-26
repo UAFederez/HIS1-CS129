@@ -34,6 +34,7 @@ public class SearchDoctorPanel extends javax.swing.JPanel {
     
     public void setDoctors(ArrayList<Doctor> doctors) {
         this.doctors = doctors;
+        System.out.println(doctors.hashCode());
         refreshResultsTable();
     }
     
@@ -177,7 +178,7 @@ public class SearchDoctorPanel extends javax.swing.JPanel {
         refreshResultsTable();
     }//GEN-LAST:event_filterComboBoxActionPerformed
 
-    private void refreshResultsTable() {
+    public void refreshResultsTable() {
         DefaultTableModel resultsTableModel = (DefaultTableModel) resultsTable.getModel();
         String comparisonText = searchText.getText().toLowerCase();
         String filterText     = filterComboBox.getSelectedItem().toString();

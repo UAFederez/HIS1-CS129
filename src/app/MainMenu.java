@@ -5,15 +5,22 @@
  */
 package app;
 
+import app.patient.PatientRequestAppointment;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import lib.Appointment;
 import lib.CSVScanner;
+import lib.Cardiologist;
 import lib.Doctor;
 import lib.DoctorFactory;
 import lib.HISDoctorFactory;
+import lib.PatientInfo;
 import lib.Schedule;
 import lib.TimePoint;
 
@@ -23,8 +30,13 @@ import lib.TimePoint;
  */
 public class MainMenu extends javax.swing.JFrame {
 
-    ArrayList<Doctor> doctorData   = readDoctorsFromCSV("csvtest.csv");
-    SearchDoctorGUI   searchDoctor = new SearchDoctorGUI();
+    private static final SimpleDateFormat  dateFormat   = new SimpleDateFormat("yyyy-MM-dd");
+    ArrayList<Doctor>      doctorData       = readDoctorsFromCSV("csvtest.csv");
+    ArrayList<Appointment> appointmentsData = readAppointmentsFromCSV("appointments.csv", doctorData);
+    
+    // JFrame Forms
+    SearchDoctorGUI           searchDoctor = new SearchDoctorGUI();
+    PatientRequestAppointment pReqAppt     = new PatientRequestAppointment();
     
     /**
      * Creates new form PatientMainMenu
@@ -32,6 +44,7 @@ public class MainMenu extends javax.swing.JFrame {
     public MainMenu() {
         initComponents();
         
+        pReqAppt.setDoctors(doctorData);
         searchDoctor.setDoctors(doctorData);
     }
 
@@ -70,6 +83,11 @@ public class MainMenu extends javax.swing.JFrame {
 
         jButton1.setText("Book For A Consultation");
         jButton1.setToolTipText("");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reqConsultationBtnAction(evt);
+            }
+        });
 
         jButton2.setText("View My Appointments");
 
@@ -277,8 +295,14 @@ public class MainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void viewDoctorInfoAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDoctorInfoAction
+        searchDoctor.getSearchPanel().refreshResultsTable();
         searchDoctor.setVisible(true);
     }//GEN-LAST:event_viewDoctorInfoAction
+
+    private void reqConsultationBtnAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reqConsultationBtnAction
+        pReqAppt.getSearchPanel().refreshResultsTable();
+        pReqAppt.setVisible(true);
+    }//GEN-LAST:event_reqConsultationBtnAction
 
     
     // TODO: probably encapsulate this in a CSVWriter since we have a CSVScanner, but
@@ -376,6 +400,104 @@ public class MainMenu extends javax.swing.JFrame {
         }
         
         return doctors;
+    }
+    
+    /**
+     * 
+     * @param path      The file path name of the CSV file of the appointments
+     * @param doctors   The ArrayList<Doctor> to cross-reference for the schedule, MUST be valid
+     * @return 
+     */
+    private static ArrayList<Appointment> readAppointmentsFromCSV(String path, ArrayList<Doctor> doctors)
+    {
+        DoctorFactory factory   = new HISDoctorFactory();
+        
+        ArrayList<Appointment> appointments = new ArrayList<>();
+        
+        File inputFile          = new File(path);
+        
+        System.out.println("Existing appointments in: " + path);
+        try(CSVScanner inputCSV = new CSVScanner(inputFile))
+        {
+            while(inputCSV.hasNext())
+            {
+                String patientFname   = inputCSV.next();
+                String patientLname   = inputCSV.next();
+                Date   birthday       = dateFormat.parse(inputCSV.next());
+                String gender         = inputCSV.next();
+                PatientInfo patient       = new PatientInfo(patientFname, patientLname, birthday, gender);
+                
+                String doctorFName    = inputCSV.next();
+                String doctorLName    = inputCSV.next();
+                String specialization = inputCSV.next();
+                
+                Doctor doctorInCSV    = factory.createDoctor(specialization, doctorFName, doctorLName, null);
+                Schedule schedInCSV   = new Schedule(inputCSV.next());
+                
+                Doctor   assocDoctor  = null;
+                Schedule assocSched   = null;
+                
+                System.out.println(schedInCSV.toString());
+                
+                for(Doctor d : doctors)
+                {
+                    if(d.equals(doctorInCSV))
+                    {
+                        assocDoctor = d;
+                        break;
+                    }
+                }
+                
+                for(Schedule s : assocDoctor.getSchedules())
+                {
+                    if(s.equals(schedInCSV))
+                    {
+                        assocSched = s;
+                        break;
+                    }
+                }
+                
+                appointments.add(new Appointment(patient, assocDoctor, assocSched, "hello", new Date()));
+            }
+        } catch(IOException | ParseException e)
+        {
+            System.err.println(e.getMessage());
+        }
+        System.out.println("====================================================");
+        
+        return appointments;
+    }
+    
+    private static void writeAppointmentsToCSV(ArrayList<Appointment> appointments)
+    { 
+        File outputFile = new File("appointments.csv");
+        try(PrintWriter outputCSV = new PrintWriter(outputFile))
+        {
+            for(Appointment appt : appointments)
+            {
+                PatientInfo  p = appt.getPatient();
+                Doctor   d = appt.getDoctor();
+                Schedule s = appt.getSchedule();
+                
+                String csvSched = s.getDay() + " " + s.getTimeFrom().getHourString()   + ":" +
+                                                     s.getTimeFrom().getMinuteString() + "-" +
+                                                     s.getTimeTo().getHourString()     + ":" +
+                                                     s.getTimeTo().getMinuteString();
+                                               
+                outputCSV.printf("%s,%s,\"%s\",%s,%s,%s,%s,%s\n", 
+                                  p.getFirstName(), p.getLastName(), dateFormat.format(p.getBirthday()),       
+                                  p.getGender(),         d.getFirstName(), d.getLastName(), 
+                                  d.getSpecialization(), csvSched);
+                System.out.printf("%s,%s,\"%s\",%s,%s,%s,%s,%s\n", 
+                                  p.getFirstName(), p.getLastName(), p.getBirthday(),       p.getGender(),
+                                  d.getFirstName(), d.getLastName(), d.getSpecialization(), csvSched);
+            }
+            
+            System.out.println("Appointments have been written to " + outputFile.getName());
+        } catch(IOException e)
+        {
+            System.err.println(e.getMessage());
+        }
     }
     
     /**

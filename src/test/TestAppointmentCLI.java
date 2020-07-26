@@ -50,7 +50,7 @@ public class TestAppointmentCLI {
             // See Date's constructors for mm, dd, yy initialization
             Date birthday   = new Date();   
             String gender   = "[TestGender]";
-            Patient patient = new Patient(name[0], name[1], birthday, gender);
+            PatientInfo patient = new PatientInfo(name[0], name[1], birthday, gender);
 
             // Step 2: Select a Specialization
             for(int i = 0; i < TestCSVFileIO.SPECIALIZATIONS.length; ++i)
@@ -85,7 +85,7 @@ public class TestAppointmentCLI {
             Schedule schedule = schedules.get(input.nextInt());
 
             // Step 5: Check if schedules are full?
-            Appointment newAppt      = new Appointment(patient, selectedDoctor, schedule);
+            Appointment newAppt      = new Appointment(patient, selectedDoctor, schedule, "hello", new Date());
             boolean hasAvailableSlot = true;
             int filledSlots          = 0;
 
@@ -149,7 +149,7 @@ public class TestAppointmentCLI {
                 String patientLname   = inputCSV.next();
                 Date   birthday       = dateFormat.parse(inputCSV.next());
                 String gender         = inputCSV.next();
-                Patient patient       = new Patient(patientFname, patientLname, birthday, gender);
+                PatientInfo patient       = new PatientInfo(patientFname, patientLname, birthday, gender);
                 
                 String doctorFName    = inputCSV.next();
                 String doctorLName    = inputCSV.next();
@@ -181,7 +181,7 @@ public class TestAppointmentCLI {
                     }
                 }
                 
-                appointments.add(new Appointment(patient, assocDoctor, assocSched));
+                appointments.add(new Appointment(patient, assocDoctor, assocSched, "hello", new Date()));
             }
         } catch(IOException | ParseException e)
         {
@@ -199,7 +199,7 @@ public class TestAppointmentCLI {
         {
             for(Appointment appt : appointments)
             {
-                Patient  p = appt.getPatient();
+                PatientInfo  p = appt.getPatient();
                 Doctor   d = appt.getDoctor();
                 Schedule s = appt.getSchedule();
                 

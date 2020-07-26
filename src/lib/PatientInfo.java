@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author uafederez
  */
-public class Patient {
+public class PatientInfo {
     private final String firstName;
     private final String lastName;
     
@@ -19,7 +19,7 @@ public class Patient {
     private final Date   birthday;        
     private final String gender;
 
-    public Patient(String fname, String lname, Date bday, String gender)
+    public PatientInfo(String fname, String lname, Date bday, String gender)
     {
         this.firstName = fname;
         this.lastName  = lname;

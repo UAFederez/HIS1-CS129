@@ -24,6 +24,11 @@ public class SearchDoctorGUI extends javax.swing.JFrame {
         
     }
     
+    public SearchDoctorPanel getSearchPanel()
+    {
+        return searchDoctorPanel1;
+    }
+    
     public void setDoctors(ArrayList<Doctor> doctors)
     {
         searchDoctorPanel1.setDoctors(doctors);
