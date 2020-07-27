@@ -20,8 +20,6 @@ public class SearchDoctorGUI extends javax.swing.JFrame {
      */
     public SearchDoctorGUI() {
         initComponents();
-        
-        
     }
     
     public SearchDoctorPanel getSearchPanel()

@@ -18,14 +18,14 @@ public class PatientInfo {
     
     // TODO: change these to proper types
     private final Date   birthday;        
-    private final String gender;
+    private final String sex;
 
     public PatientInfo(String fname, String lname, Date bday, String gender)
     {
         this.firstName = fname;
         this.lastName  = lname;
         this.birthday  = bday;
-        this.gender    = gender;
+        this.sex    = gender;
     }
     
     public String getFirstName() {
@@ -40,8 +40,8 @@ public class PatientInfo {
         return birthday;
     }
 
-    public String getGender() {
-        return gender;
+    public String getSex() {
+        return sex;
     }
         
 }

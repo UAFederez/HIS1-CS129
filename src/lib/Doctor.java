@@ -20,8 +20,6 @@ public abstract class Doctor {
     private final String lastName;
     private ArrayList<Schedule> schedules;
     
-    private Account account;
-    
     protected final Random randomGenerator = new Random();
     
     public Doctor(String fName, String lName)
@@ -29,16 +27,6 @@ public abstract class Doctor {
         this.firstName = fName;
         this.lastName  = lName;
         this.schedules = new ArrayList<>();
-    }
-    
-    public Account getAccount()
-    {
-        return account;
-    }
-    
-    public void setAccount(Account acc)
-    {
-        this.account = acc;
     }
     
     public double getConsultationRate() {

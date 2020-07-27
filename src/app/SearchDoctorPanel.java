@@ -202,7 +202,7 @@ public class SearchDoctorPanel extends javax.swing.JPanel {
                             doc.getLastName(), 
                             doc.getFirstName(), 
                             doc.getSpecialization(),
-                            doc.getConsultationRate()
+                            "PHP " + doc.getConsultationRate()
                         });
                         searchResults.add(doc);
                     }

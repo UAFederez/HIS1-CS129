@@ -210,10 +210,10 @@ public class TestAppointmentCLI {
                                                
                 outputCSV.printf("%s,%s,\"%s\",%s,%s,%s,%s,%s\n", 
                                   p.getFirstName(), p.getLastName(), dateFormat.format(p.getBirthday()),       
-                                  p.getGender(),         d.getFirstName(), d.getLastName(), 
+                                  p.getSex(),         d.getFirstName(), d.getLastName(), 
                                   d.getSpecialization(), csvSched);
                 System.out.printf("%s,%s,\"%s\",%s,%s,%s,%s,%s\n", 
-                                  p.getFirstName(), p.getLastName(), p.getBirthday(),       p.getGender(),
+                                  p.getFirstName(), p.getLastName(), p.getBirthday(),       p.getSex(),
                                   d.getFirstName(), d.getLastName(), d.getSpecialization(), csvSched);
             }
             

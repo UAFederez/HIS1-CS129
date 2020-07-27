@@ -9,11 +9,18 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerDateModel;
 import lib.Account;
 import lib.Appointment;
 import lib.CSVScanner;
@@ -116,7 +123,7 @@ public class MainGUI extends javax.swing.JFrame {
                                   p.getFirstName(), 
                                   p.getLastName(), 
                                   dateFormat.format(p.getBirthday()),       
-                                  p.getGender(),         
+                                  p.getSex(),         
                                   d.getFirstName(), 
                                   d.getLastName(), 
                                   d.getSpecialization(), 
@@ -128,7 +135,7 @@ public class MainGUI extends javax.swing.JFrame {
                                   p.getFirstName(), 
                                   p.getLastName(), 
                                   dateFormat.format(p.getBirthday()),       
-                                  p.getGender(),         
+                                  p.getSex(),         
                                   d.getFirstName(), 
                                   d.getLastName(), 
                                   d.getSpecialization(), 
@@ -177,7 +184,7 @@ public class MainGUI extends javax.swing.JFrame {
             {
                 outputCSV.printf("%s,%s,%s,%s\n", info.getFirstName(), info.getLastName(),
                                                   dateFormat.format(info.getBirthday()),
-                                                  info.getGender());
+                                                  info.getSex());
             }
         } catch(IOException e)
         {
@@ -197,6 +204,8 @@ public class MainGUI extends javax.swing.JFrame {
         mainMenu.setDoctors(doctorData);
         mainMenu.setAppointments(appointmentsData);
         mainMenu.setAccounts(accounts);
+        dateSpinner.setModel(new SpinnerDateModel());
+        dateSpinner.setEditor(new JSpinner.DateEditor(dateSpinner, dateFormat.toPattern()));
     }
 
     /**
@@ -221,7 +230,6 @@ public class MainGUI extends javax.swing.JFrame {
         patientLName = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        patientBDay = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         patientUserName = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -229,6 +237,12 @@ public class MainGUI extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        sexComboBox = new javax.swing.JComboBox<>();
+        dateSpinner = new javax.swing.JSpinner();
+        jLabel11 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login / Sign up");
@@ -259,7 +273,7 @@ public class MainGUI extends javax.swing.JFrame {
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(loginUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
+                            .addComponent(loginUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
                             .addComponent(loginPassword)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginPanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -279,7 +293,7 @@ public class MainGUI extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addContainerGap(153, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Log in Existing Account", loginPanel);
@@ -305,6 +319,17 @@ public class MainGUI extends javax.swing.JFrame {
 
         jLabel9.setText("Account Login Details");
 
+        jLabel10.setText("Sex:");
+
+        sexComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
+        sexComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sexComboBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("(YYYY-MM-DD)");
+
         javax.swing.GroupLayout registerPanelLayout = new javax.swing.GroupLayout(registerPanel);
         registerPanel.setLayout(registerPanelLayout);
         registerPanelLayout.setHorizontalGroup(
@@ -314,12 +339,10 @@ public class MainGUI extends javax.swing.JFrame {
                 .addGroup(registerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(registerPanelLayout.createSequentialGroup()
                         .addGroup(registerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(registerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(patientBDay)
                             .addComponent(patientUserName)
                             .addComponent(patientPassword)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registerPanelLayout.createSequentialGroup()
@@ -327,17 +350,24 @@ public class MainGUI extends javax.swing.JFrame {
                         .addComponent(jButton2))
                     .addGroup(registerPanelLayout.createSequentialGroup()
                         .addGroup(registerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(registerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(patientFName)
-                            .addComponent(patientLName, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)))
-                    .addGroup(registerPanelLayout.createSequentialGroup()
-                        .addGroup(registerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
                             .addComponent(jLabel9))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(registerPanelLayout.createSequentialGroup()
+                        .addGroup(registerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(registerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(dateSpinner)
+                            .addComponent(patientFName)
+                            .addComponent(patientLName)
+                            .addGroup(registerPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addGap(0, 155, Short.MAX_VALUE))
+                            .addComponent(sexComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
 
@@ -358,8 +388,14 @@ public class MainGUI extends javax.swing.JFrame {
                     .addComponent(patientLName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(registerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(sexComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(registerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(patientBDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dateSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel11)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -372,10 +408,31 @@ public class MainGUI extends javax.swing.JFrame {
                     .addComponent(patientPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Register New Patient", registerPanel);
+
+        jPanel2.setBackground(new java.awt.Color(102, 153, 255));
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setText("Hospital Information System");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel14)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -385,54 +442,99 @@ public class MainGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jTabbedPane1)
                 .addContainerGap())
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1)
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void signUpPatientAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpPatientAction
-        Account newAcc = new Account(patientFName.getText() + " " + patientLName.getText(),
-                                     patientUserName.getText(), 
-                                     new String(patientPassword.getPassword()), 
-                                     Account.PATIENT);
+    private boolean validateSignUpInput()
+    {
+        boolean isValidFirstName = !patientFName.getText().isEmpty();
+        boolean isValidLastName  = !patientLName.getText().isEmpty();
+        boolean isValidUsername  = !patientUserName.getText().isEmpty();
         
-        boolean isAccountAlreadyExisting = false;
+        String pass              = Arrays.toString(patientPassword.getPassword());
+        boolean isValidPassword  = !pass.isEmpty();
         
-        for(Account acc : accounts)
+        for(char ch : patientFName.getText().toCharArray())
         {
-            if(newAcc.equals(acc))
+            if(Character.isDigit(ch))
             {
-                isAccountAlreadyExisting = true;
+                isValidFirstName = false;
                 break;
             }
         }
         
-        if(isAccountAlreadyExisting)
+        for(char ch : patientLName.getText().toCharArray())
         {
-            JOptionPane.showMessageDialog(null, "Account already exists!");
-        } else
-        {
-            accounts.add(newAcc);
-            writeAccountsToCSV(accounts, "accounts.csv");
-            
-            patientData.add(new PatientInfo(patientFName.getText(), 
-                                            patientLName.getText(), 
-                                            new Date(), "Male"));
-            writePatientsToCSV(patientData, "patients.csv");
-            
-            JOptionPane.showMessageDialog(null, "Patient account successfully created!");
+            if(Character.isDigit(ch))
+            {
+                isValidLastName = false;
+                break;
+            }
         }
+        
+        return isValidFirstName && isValidLastName &&
+               isValidUsername  && isValidPassword;
+    }
+    
+    private void signUpPatientAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpPatientAction
+        if(validateSignUpInput())
+        {
+            Account newAcc = new Account(patientFName.getText() + " " + patientLName.getText(),
+                                         patientUserName.getText(), 
+                                         new String(patientPassword.getPassword()), 
+                                         Account.PATIENT);
+
+            boolean isAccountAlreadyExisting = false;
+
+            for(Account acc : accounts)
+            {
+                if(newAcc.equals(acc))
+                {
+                    isAccountAlreadyExisting = true;
+                    break;
+                }
+            }
+
+            if(isAccountAlreadyExisting)
+            {
+                JOptionPane.showMessageDialog(null, "Account already exists!");
+            } else
+            {
+                accounts.add(newAcc);
+                writeAccountsToCSV(accounts, "accounts.csv");
+
+                try {
+                    patientData.add(new PatientInfo(patientFName.getText(),
+                            patientLName.getText(),
+                            dateFormat.parse(dateFormat.format(dateSpinner.getValue())),
+                            sexComboBox.getSelectedItem().toString()));
+                } catch (ParseException ex) {
+                    Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                writePatientsToCSV(patientData, "patients.csv");
+
+                JOptionPane.showMessageDialog(null, "Patient account successfully created!");
+            }
+        } else
+            JOptionPane.showMessageDialog(null, "Error: please recheck your input!");
     }//GEN-LAST:event_signUpPatientAction
 
     private void loginButtonAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonAction
+        
+        
         Account matchingAccount = null;
         for(Account acc : accounts)
         {
@@ -456,6 +558,10 @@ public class MainGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Invalid account!");
         }
     }//GEN-LAST:event_loginButtonAction
+
+    private void sexComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sexComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sexComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -603,14 +709,13 @@ public class MainGUI extends javax.swing.JFrame {
                     int dayOfWeek        = scanner.nextInt();
                     String timeFromStr[] = scanner.next().split(":");
                     String timeToStr[]   = scanner.next().split(":");
-                    boolean isByAppt     = (scanner.nextInt() == 1);
                     
                     TimePoint timeFrom   = new TimePoint(Integer.parseInt(timeFromStr[0]), 
                                                          Integer.parseInt(timeFromStr[1]));
                     TimePoint timeTo     = new TimePoint(Integer.parseInt(timeToStr[0]), 
                                                          Integer.parseInt(timeToStr[1]));
                     
-                    Schedule sched = new Schedule(dayOfWeek, timeFrom, timeTo, isByAppt);
+                    Schedule sched = new Schedule(dayOfWeek, timeFrom, timeTo);
                     
                     /**
                     System.out.println("\tSchedule for Dr. " + 
@@ -631,9 +736,13 @@ public class MainGUI extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JSpinner dateSpinner;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -642,15 +751,16 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel loginPanel;
     private javax.swing.JPasswordField loginPassword;
     private javax.swing.JTextField loginUserName;
-    private javax.swing.JTextField patientBDay;
     private javax.swing.JTextField patientFName;
     private javax.swing.JTextField patientLName;
     private javax.swing.JPasswordField patientPassword;
     private javax.swing.JTextField patientUserName;
     private javax.swing.JPanel registerPanel;
+    private javax.swing.JComboBox<String> sexComboBox;
     // End of variables declaration//GEN-END:variables
 }

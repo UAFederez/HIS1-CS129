@@ -14,7 +14,6 @@ public class Schedule implements Comparable<Schedule> {
     private final int       dayOfWeek;
     private final TimePoint timeFrom;
     private final TimePoint timeTo;
-    private final boolean   isByAppointment;
     
     /** Note: Because doctors will be listed by sorted schedule, one way is to create
      *        a new array of Schedules, put all the schedules of all the doctors
@@ -29,13 +28,11 @@ public class Schedule implements Comparable<Schedule> {
      * @param to        Time in minutes (0 - 59)
      * @param isByAppt  If this schedule is by appointment
      */
-    public Schedule(int weekDay, TimePoint from, TimePoint to, boolean isByAppt) 
+    public Schedule(int weekDay, TimePoint from, TimePoint to) 
     {
         this.dayOfWeek = weekDay;
         this.timeFrom  = from;
         this.timeTo    = to;
-        
-        this.isByAppointment = isByAppt;
     }
     
     /**
@@ -56,7 +53,6 @@ public class Schedule implements Comparable<Schedule> {
         
         this.timeTo    = new TimePoint(Integer.parseInt(timeToStr[0]), 
                                        Integer.parseInt(timeToStr[1]));
-        this.isByAppointment = true;
     }
     
     /**
@@ -66,14 +62,12 @@ public class Schedule implements Comparable<Schedule> {
      * @param mmFrom    The minute of the start of the schedule (0 - 59)
      * @param hhTo      The hour of the end of the schedule     (0 - 23)
      * @param mmTo      The minute of the end of the schedule   (0 - 59)
-     * @param isByAppt  If this schedule is by appointment
      */
-    public Schedule(int weekDay, int hhFrom, int mmFrom, int hhTo, int mmTo, boolean isByAppt) 
+    public Schedule(int weekDay, int hhFrom, int mmFrom, int hhTo, int mmTo) 
     {
         this.dayOfWeek = weekDay;
         this.timeFrom  = new TimePoint(hhFrom, mmFrom);
         this.timeTo    = new TimePoint(hhTo, mmTo);
-        this.isByAppointment = isByAppt;
     }
    	
     public TimePoint getTimeFrom() {
@@ -86,10 +80,6 @@ public class Schedule implements Comparable<Schedule> {
     
     public int getDay() {
         return dayOfWeek;
-    }
-    
-    public boolean isByAppointment() {
-        return isByAppointment;
     }
     
     public void setAssociatedDoctor(Doctor doctor) {

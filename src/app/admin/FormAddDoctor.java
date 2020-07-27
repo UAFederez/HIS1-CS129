@@ -12,6 +12,7 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -81,10 +82,6 @@ public class FormAddDoctor extends javax.swing.JFrame{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panel1 = new java.awt.Panel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        buttonGroup1 = new javax.swing.ButtonGroup();
         panel2 = new java.awt.Panel();
         panel3 = new java.awt.Panel();
         inpFirstName = new javax.swing.JTextField();
@@ -107,7 +104,6 @@ public class FormAddDoctor extends javax.swing.JFrame{
         labSched10 = new javax.swing.JLabel();
         ToMinute = new javax.swing.JSpinner();
         labSpecialization = new javax.swing.JLabel();
-        bSpecialization = new javax.swing.JComboBox<>();
         Doctor = new javax.swing.JButton();
         labLastName2 = new javax.swing.JLabel();
         labLastName3 = new javax.swing.JLabel();
@@ -124,42 +120,10 @@ public class FormAddDoctor extends javax.swing.JFrame{
         labLastName5 = new javax.swing.JLabel();
         labLastName6 = new javax.swing.JLabel();
         inpPassword = new javax.swing.JPasswordField();
-
-        panel1.setBackground(new java.awt.Color(51, 51, 51));
-        panel1.setForeground(new java.awt.Color(51, 51, 51));
-
-        jLabel1.setFont(new java.awt.Font("Castellar", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 0));
-        jLabel1.setText("A Song of Ice and Fire");
-        jLabel1.setMaximumSize(new java.awt.Dimension(168, 23));
-
-        jLabel2.setFont(new java.awt.Font("Gill Sans Ultra Bold Condensed", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Medical Centre");
-
-        javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
-        panel1.setLayout(panel1Layout);
-        panel1Layout.setHorizontalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel1Layout.createSequentialGroup()
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addGap(284, 284, 284)
-                        .addComponent(jLabel2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        panel1Layout.setVerticalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel1Layout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addGap(30, 30, 30))
-        );
+        bSpecialization = new javax.swing.JComboBox<>();
+        labLastName7 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        consultationRateSpinner = new javax.swing.JSpinner();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -180,23 +144,11 @@ public class FormAddDoctor extends javax.swing.JFrame{
         panel3.setBackground(new java.awt.Color(255, 255, 255));
         panel3.setForeground(new java.awt.Color(255, 255, 255));
 
-        inpFirstName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inpFirstNameActionPerformed(evt);
-            }
-        });
-
         labSched.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
         labSched.setText("Schedule:");
 
         labFirstName1.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
         labFirstName1.setText("First Name:");
-
-        inpLastName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inpLastNameActionPerformed(evt);
-            }
-        });
 
         FromHour.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
 
@@ -242,14 +194,6 @@ public class FormAddDoctor extends javax.swing.JFrame{
         labSpecialization.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
         labSpecialization.setText("Specialization:");
 
-        bSpecialization.setFont(new java.awt.Font("Yu Gothic Light", 0, 13)); // NOI18N
-        bSpecialization.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cardiology", "Gastroentrology" }));
-        bSpecialization.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bSpecializationActionPerformed(evt);
-            }
-        });
-
         Doctor.setBackground(new java.awt.Color(255, 255, 255));
         Doctor.setFont(new java.awt.Font("Yu Gothic Medium", 1, 13)); // NOI18N
         Doctor.setText("Accept");
@@ -260,6 +204,7 @@ public class FormAddDoctor extends javax.swing.JFrame{
         });
 
         labLastName2.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        labLastName2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labLastName2.setText("[ Day ]");
 
         labLastName3.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
@@ -271,54 +216,18 @@ public class FormAddDoctor extends javax.swing.JFrame{
         labLastName4.setText("[ Doctor Name ]");
 
         dMonday.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(dMonday);
-        dMonday.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dMondayActionPerformed(evt);
-            }
-        });
 
         dTuesday.setBackground(new java.awt.Color(255, 255, 255));
-        dTuesday.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dTuesdayActionPerformed(evt);
-            }
-        });
 
         dWednesday.setBackground(new java.awt.Color(255, 255, 255));
-        dWednesday.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dWednesdayActionPerformed(evt);
-            }
-        });
 
         dThursday.setBackground(new java.awt.Color(255, 255, 255));
-        dThursday.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dThursdayActionPerformed(evt);
-            }
-        });
 
         dFriday.setBackground(new java.awt.Color(255, 255, 255));
-        dFriday.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dFridayActionPerformed(evt);
-            }
-        });
 
         dSaturday.setBackground(new java.awt.Color(255, 255, 255));
-        dSaturday.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dSaturdayActionPerformed(evt);
-            }
-        });
 
         dSunday.setBackground(new java.awt.Color(255, 255, 255));
-        dSunday.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dSundayActionPerformed(evt);
-            }
-        });
 
         labFirstName2.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
         labFirstName2.setText("User Name:");
@@ -336,6 +245,18 @@ public class FormAddDoctor extends javax.swing.JFrame{
         labLastName6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labLastName6.setText("[ Doctor Log-in Info ]");
 
+        bSpecialization.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 13)); // NOI18N
+        bSpecialization.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cardiology", "Gastroentrology" }));
+
+        labLastName7.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
+        labLastName7.setText("Consultation Rate");
+
+        jLabel3.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 14)); // NOI18N
+        jLabel3.setText("PHP");
+
+        consultationRateSpinner.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 14)); // NOI18N
+        consultationRateSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+
         javax.swing.GroupLayout panel3Layout = new javax.swing.GroupLayout(panel3);
         panel3.setLayout(panel3Layout);
         panel3Layout.setHorizontalGroup(
@@ -344,165 +265,167 @@ public class FormAddDoctor extends javax.swing.JFrame{
                 .addGap(31, 31, 31)
                 .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel3Layout.createSequentialGroup()
-                        .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(panel3Layout.createSequentialGroup()
-                                .addComponent(labFirstName1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(inpFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))
-                            .addComponent(labLastName4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(panel3Layout.createSequentialGroup()
-                                .addComponent(labFirstName2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(inpUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panel3Layout.createSequentialGroup()
-                                .addComponent(labLastName5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(inpPassword))
-                            .addComponent(labLastName6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
                         .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panel3Layout.createSequentialGroup()
-                                .addComponent(labLastName1)
+                                .addComponent(labLastName7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(inpLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 167, Short.MAX_VALUE))
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(consultationRateSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panel3Layout.createSequentialGroup()
-                                .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(labLastName3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
-                                        .addComponent(labSpecialization)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(bSpecialization, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(labLastName1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(labFirstName1, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(inpFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(inpLastName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel3Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(panel3Layout.createSequentialGroup()
-                                        .addComponent(labSched)
+                                        .addComponent(labLastName5)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(FromHour, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(inpPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(panel3Layout.createSequentialGroup()
+                                        .addComponent(labFirstName2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(labSched1)
-                                        .addGap(2, 2, 2)
-                                        .addComponent(FromMinute, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(labSched9)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(ToHour, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(7, 7, 7)
-                                        .addComponent(labSched10)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(ToMinute, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(labSched2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dMonday)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(labSched3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dTuesday)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(labSched4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dWednesday)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labLastName2)
+                                        .addComponent(inpUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(labLastName2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap())
                             .addGroup(panel3Layout.createSequentialGroup()
-                                .addComponent(labSched5)
+                                .addGap(4, 4, 4)
+                                .addComponent(labLastName6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(28, 28, 28))))
+                    .addGroup(panel3Layout.createSequentialGroup()
+                        .addComponent(labLastName4, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(panel3Layout.createSequentialGroup()
+                        .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(panel3Layout.createSequentialGroup()
+                                .addComponent(labSpecialization)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(bSpecialization, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(panel3Layout.createSequentialGroup()
+                                .addComponent(labSched)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dThursday)
+                                .addComponent(FromHour, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(2, 2, 2)
+                                .addComponent(labSched1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(labSched6)
+                                .addComponent(FromMinute, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dFriday)
+                                .addComponent(labSched9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(labSched7)
+                                .addComponent(ToHour, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dSaturday)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(labSched8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dSunday)))
-                        .addGap(36, 36, 36))))
+                                .addComponent(labSched10)
+                                .addGap(7, 7, 7)
+                                .addComponent(ToMinute, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(labLastName3, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(labSched2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dMonday)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labSched3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dTuesday)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labSched4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(dWednesday)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labSched5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dThursday)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labSched6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dFriday)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labSched7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dSaturday)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labSched8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dSunday)
+                        .addGap(30, 30, 30))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Doctor)
-                .addGap(345, 345, 345))
+                .addGap(277, 277, 277))
         );
 
         panel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {labFirstName2, labLastName5});
 
         panel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {labSched, labSpecialization});
 
+        panel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {inpPassword, inpUserName});
+
+        panel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {labFirstName1, labLastName1, labLastName7});
+
         panel3Layout.setVerticalGroup(
             panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel3Layout.createSequentialGroup()
-                .addGap(55, 55, 55)
+                .addGap(12, 12, 12)
                 .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labLastName4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labLastName6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel3Layout.createSequentialGroup()
-                        .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labFirstName1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(inpFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panel3Layout.createSequentialGroup()
-                                .addGap(0, 46, Short.MAX_VALUE)
-                                .addComponent(labLastName2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(labSched5, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(dThursday, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(labSched6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(dFriday, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(labSched7, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(dSaturday, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(labSched8, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(dSunday, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(panel3Layout.createSequentialGroup()
-                                .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(labLastName1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(inpLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(labLastName3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(FromHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(ToHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(ToMinute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(labSched, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(labSched1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(FromMinute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(labSched9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(labSched10, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(labSched3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(labSched4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(dWednesday, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(dTuesday, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(panel3Layout.createSequentialGroup()
-                        .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labFirstName2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(inpUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labLastName5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(inpPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(dMonday, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(labSched2, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(inpFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labFirstName2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inpUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labFirstName1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(labLastName1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inpLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labLastName5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inpPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bSpecialization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labSpecialization, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                    .addComponent(labLastName7, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(consultationRateSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(labLastName2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labLastName3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                        .addComponent(ToMinute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labSched10, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ToHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labSched9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(FromMinute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labSched1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(FromHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labSched, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labSched2)
+                        .addComponent(dMonday, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labSched3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(dTuesday, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labSched4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(dWednesday, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labSched5)
+                        .addComponent(dThursday, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(dFriday, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labSched6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labSched7, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(dSaturday, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labSched8, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(dSunday, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panel3Layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(bSpecialization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labSpecialization, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Doctor)
-                .addGap(26, 26, 26))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -556,8 +479,7 @@ public class FormAddDoctor extends javax.swing.JFrame{
                                     sched.getTimeFrom().getHourString()   + ":" +
                                     sched.getTimeFrom().getMinuteString() + "," +
                                     sched.getTimeTo().getHourString()     + ":" +
-                                    sched.getTimeTo().getMinuteString()   + "," +
-                                    (sched.isByAppointment() ? 1 : 0));
+                                    sched.getTimeTo().getMinuteString());
                 }
             }
             
@@ -569,7 +491,51 @@ public class FormAddDoctor extends javax.swing.JFrame{
     }
     
     private boolean validateInput() {
-        return true;
+        
+        boolean isValidFirstName = !inpFirstName.getText().isEmpty();
+        boolean isValidLastName  = !inpFirstName.getText().isEmpty();
+        boolean isValidUserName  = !inpUserName.getText().isEmpty();
+        boolean isValidPassword  = !Arrays.toString(inpPassword.getPassword()).isEmpty();
+        
+        for(char ch : inpFirstName.getText().toCharArray())
+        {
+            if(Character.isDigit(ch))
+            {
+                isValidFirstName = false;
+                break;
+            }
+        }
+        
+        for(char ch : inpFirstName.getText().toCharArray())
+        {
+            if(Character.isDigit(ch))
+            {
+                isValidLastName = false;
+                break;
+            }
+        }
+        
+        int selectedBoxes = 0;
+        for(int i = 0; i < daysOfWeekBoxes.length; ++i)
+        {
+            if(daysOfWeekBoxes[i].isSelected())
+                selectedBoxes++;
+        }
+        
+        boolean isValidTime = true;
+        TimePoint timeFrom  = new TimePoint(Integer.parseInt(FromHour.getValue().toString()), 
+                                            Integer.parseInt(FromMinute.getValue().toString()));
+        TimePoint timeTo    = new TimePoint(Integer.parseInt(ToHour.getValue().toString()), 
+                                            Integer.parseInt(ToMinute.getValue().toString()));
+        
+        // If the time from is set later than time to
+        if((timeFrom.inMinutes() - timeTo.inMinutes()) >= 0)
+            isValidTime = false;
+        
+        boolean isValidRate = (Integer.parseInt(consultationRateSpinner.getValue().toString()) != 0);
+        
+        return isValidFirstName && isValidLastName && (selectedBoxes != 0) &&
+               isValidUserName  && isValidPassword && isValidTime && isValidRate;
     }
     
     private void DoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DoctorActionPerformed
@@ -577,92 +543,55 @@ public class FormAddDoctor extends javax.swing.JFrame{
             String firstName      = inpFirstName.getText();
             String lastName       = inpLastName.getText();
             String specialization = bSpecialization.getSelectedItem().toString();
-
-            TimePoint timeFrom    = new TimePoint(Integer.parseInt(FromHour.getValue().toString()), 
-                                                  Integer.parseInt(FromMinute.getValue().toString()));
-            TimePoint timeTo      = new TimePoint(Integer.parseInt(ToHour.getValue().toString()), 
-                                                  Integer.parseInt(ToMinute.getValue().toString()));
-
-            for(int i = 0; i < daysOfWeekBoxes.length; ++i) {
-                if(daysOfWeekBoxes[i].isSelected())
-                    schedules.add(new Schedule(i, timeFrom, timeTo, false));
+            boolean isUniqueDoctor = true;
+            
+            for(Doctor d : doct) {
+                String inputName = firstName + " " + lastName;
+                if(inputName.equals(d.getFirstName() + " " + d.getLastName()) &&
+                   specialization.equals(d.getSpecialization()))
+                {
+                    isUniqueDoctor = false;
+                    break;
+                }
             }
+            
+            if(!isUniqueDoctor)
+            {
+                JOptionPane.showMessageDialog(null, "Error: Doctor's information already exists in the database");
+            } else{
 
-            Doctor newDoct = factory.createDoctor(specialization, firstName, lastName, schedules);
-            
-            doct.add(newDoct);
-            writeDoctorsToCSV(doct);
-            
-            // Create the doctor login account
-            String userName   = inpUserName.getText();
-            String password   = new String(inpPassword.getPassword());
-            
-            Account newAcc    = new Account(newDoct.getFirstName() + " " + newDoct.getLastName(), 
-                                            userName, password, Account.DOCTOR);
-            
-            accounts.add(newAcc);
-            MainGUI.writeAccountsToCSV(accounts, "accounts.csv");
-            
-            JOptionPane.showMessageDialog(null, "Successfully Added new doctor");
-        }
+                TimePoint timeFrom    = new TimePoint(Integer.parseInt(FromHour.getValue().toString()), 
+                                                      Integer.parseInt(FromMinute.getValue().toString()));
+                TimePoint timeTo      = new TimePoint(Integer.parseInt(ToHour.getValue().toString()), 
+                                                      Integer.parseInt(ToMinute.getValue().toString()));
+                schedules.clear();
+                for(int i = 0; i < daysOfWeekBoxes.length; ++i) {
+                    if(daysOfWeekBoxes[i].isSelected())
+                        schedules.add(new Schedule(i, timeFrom, timeTo));
+                }
+
+                Doctor newDoct = factory.createDoctor(specialization, firstName, lastName, schedules);
+
+                newDoct.setConsultationRate(Double.parseDouble(consultationRateSpinner.getValue().toString()));
+
+                doct.add(newDoct);
+                writeDoctorsToCSV(doct);
+
+                // Create the doctor login account
+                String userName   = inpUserName.getText();
+                String password   = new String(inpPassword.getPassword());
+
+                Account newAcc    = new Account(newDoct.getFirstName() + " " + newDoct.getLastName(), 
+                                                userName, password, Account.DOCTOR);
+
+                accounts.add(newAcc);
+                MainGUI.writeAccountsToCSV(accounts, "accounts.csv");
+
+                JOptionPane.showMessageDialog(null, "Successfully Added new doctor");
+            }
+        } else
+            JOptionPane.showMessageDialog(null, "Error: please recheck your input");
     }//GEN-LAST:event_DoctorActionPerformed
-
-    private void inpLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpLastNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inpLastNameActionPerformed
-
-    private void inpFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpFirstNameActionPerformed
-
-    }//GEN-LAST:event_inpFirstNameActionPerformed
-
-    private void bSpecializationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSpecializationActionPerformed
-//    int selectedIndex = bSpecialization.getSelectedIndex();
-//        if (selectedIndex < bSpecialization.getItemCount()) {
-//            bSpecialization.setSelectedIndex(selectedIndex + 1); 
-//            
-//        if  (selectedIndex == 0)
-//            //spec = cardio.getSpecialization();
-//            spec = "Cardiology";
-//        else if  (selectedIndex == 1)
-//            //spec = gastro.getSpecialization();
-//            spec = "Gastroentrology";
-        
-//        }
-    }//GEN-LAST:event_bSpecializationActionPerformed
-
-    private void dMondayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dMondayActionPerformed
-        
-//        dMonday.setSelected(true);
-//        if(dMonday.isSelected())
-//        {
-//            day = 1;
-//            s.getDay();
-//        }
-    }//GEN-LAST:event_dMondayActionPerformed
-
-    private void dTuesdayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dTuesdayActionPerformed
-        dTuesday.setSelected(true);
-    }//GEN-LAST:event_dTuesdayActionPerformed
-
-    private void dWednesdayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dWednesdayActionPerformed
-        dWednesday.setSelected(true);
-    }//GEN-LAST:event_dWednesdayActionPerformed
-
-    private void dThursdayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dThursdayActionPerformed
-        dThursday.setSelected(true);
-    }//GEN-LAST:event_dThursdayActionPerformed
-
-    private void dFridayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dFridayActionPerformed
-        dFriday.setSelected(true);
-    }//GEN-LAST:event_dFridayActionPerformed
-
-    private void dSaturdayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dSaturdayActionPerformed
-        dSaturday.setSelected(true);
-    }//GEN-LAST:event_dSaturdayActionPerformed
-
-    private void dSundayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dSundayActionPerformed
-        dSunday.setSelected(true);
-    }//GEN-LAST:event_dSundayActionPerformed
 
     private void inpUserNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpUserNameActionPerformed
         // TODO add your handling code here:
@@ -716,7 +645,7 @@ public class FormAddDoctor extends javax.swing.JFrame{
     private javax.swing.JSpinner ToHour;
     private javax.swing.JSpinner ToMinute;
     private javax.swing.JComboBox<String> bSpecialization;
-    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JSpinner consultationRateSpinner;
     private javax.swing.JCheckBox dFriday;
     private javax.swing.JCheckBox dMonday;
     private javax.swing.JCheckBox dSaturday;
@@ -728,8 +657,7 @@ public class FormAddDoctor extends javax.swing.JFrame{
     private javax.swing.JTextField inpLastName;
     private javax.swing.JPasswordField inpPassword;
     private javax.swing.JTextField inpUserName;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel labFirstName1;
     private javax.swing.JLabel labFirstName2;
     private javax.swing.JLabel labLastName1;
@@ -738,6 +666,7 @@ public class FormAddDoctor extends javax.swing.JFrame{
     private javax.swing.JLabel labLastName4;
     private javax.swing.JLabel labLastName5;
     private javax.swing.JLabel labLastName6;
+    private javax.swing.JLabel labLastName7;
     private javax.swing.JLabel labSched;
     private javax.swing.JLabel labSched1;
     private javax.swing.JLabel labSched10;
@@ -750,7 +679,6 @@ public class FormAddDoctor extends javax.swing.JFrame{
     private javax.swing.JLabel labSched8;
     private javax.swing.JLabel labSched9;
     private javax.swing.JLabel labSpecialization;
-    private java.awt.Panel panel1;
     private java.awt.Panel panel2;
     private java.awt.Panel panel3;
     // End of variables declaration//GEN-END:variables

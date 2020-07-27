@@ -491,8 +491,7 @@ public class MainMenu extends javax.swing.JFrame {
                                     sched.getTimeFrom().getHourString()   + ":" +
                                     sched.getTimeFrom().getMinuteString() + "," +
                                     sched.getTimeTo().getHourString()     + ":" +
-                                    sched.getTimeTo().getMinuteString()   + "," +
-                                    (sched.isByAppointment() ? 1 : 0));
+                                    sched.getTimeTo().getMinuteString());
                 }
             }
             
@@ -534,14 +533,13 @@ public class MainMenu extends javax.swing.JFrame {
                     int dayOfWeek        = scanner.nextInt();
                     String timeFromStr[] = scanner.next().split(":");
                     String timeToStr[]   = scanner.next().split(":");
-                    boolean isByAppt     = (scanner.nextInt() == 1);
                     
                     TimePoint timeFrom   = new TimePoint(Integer.parseInt(timeFromStr[0]), 
                                                          Integer.parseInt(timeFromStr[1]));
                     TimePoint timeTo     = new TimePoint(Integer.parseInt(timeToStr[0]), 
                                                          Integer.parseInt(timeToStr[1]));
                     
-                    Schedule sched = new Schedule(dayOfWeek, timeFrom, timeTo, isByAppt);
+                    Schedule sched = new Schedule(dayOfWeek, timeFrom, timeTo);
                     
                     /**
                     System.out.println("\tSchedule for Dr. " + 

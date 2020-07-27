@@ -31,9 +31,6 @@ public class HISDoctorFactory extends DoctorFactory {
                 doctor.addSchedule(s);
         }
         
-        if(doctor != null)
-            doctor.computeRate();
-        
         return doctor;
     }
 }

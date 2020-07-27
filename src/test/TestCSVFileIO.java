@@ -47,7 +47,7 @@ public class TestCSVFileIO {
                 TimePoint from = new TimePoint(random.nextInt(23), random.nextInt(59));
                 TimePoint to   = new TimePoint((from.getHour() + 3) % 24, from.getMinute());
                 
-                doctor.addSchedule(new Schedule(random.nextInt(6), from, to, true));
+                doctor.addSchedule(new Schedule(random.nextInt(6), from, to));
             }
             testDoctors.add(doctor);
         }
@@ -90,8 +90,7 @@ public class TestCSVFileIO {
                                     sched.getTimeFrom().getHourString()   + ":" +
                                     sched.getTimeFrom().getMinuteString() + "," +
                                     sched.getTimeTo().getHourString()     + ":" +
-                                    sched.getTimeTo().getMinuteString()   + "," +
-                                    (sched.isByAppointment() ? 1 : 0));
+                                    sched.getTimeTo().getMinuteString());
                 }
             }
             
@@ -140,7 +139,7 @@ public class TestCSVFileIO {
                     TimePoint timeTo     = new TimePoint(Integer.parseInt(timeToStr[0]), 
                                                          Integer.parseInt(timeToStr[1]));
                     
-                    Schedule sched = new Schedule(dayOfWeek, timeFrom, timeTo, isByAppt);
+                    Schedule sched = new Schedule(dayOfWeek, timeFrom, timeTo);
                     
                     /**
                     System.out.println("\tSchedule for Dr. " + 

@@ -60,7 +60,7 @@ public class DocManageAppointments extends javax.swing.JFrame {
                     TimePoint tFrom = selectedAppt.getSchedule().getTimeFrom();
                     TimePoint tTo   = selectedAppt.getSchedule().getTimeTo();
                     SpinnerNumberModel hourModel   = new SpinnerNumberModel(tFrom.getHour(),   tFrom.getHour(),   tTo.getHour(), 1);
-                    SpinnerNumberModel minuteModel = new SpinnerNumberModel(tFrom.getMinute(), tFrom.getMinute(), tTo.getMinute(), 1);
+                    SpinnerNumberModel minuteModel = new SpinnerNumberModel(tFrom.getMinute(), 0, 59, 1);
 
                     fromHour.setModel(hourModel);
                     fromMinute.setModel(minuteModel);
@@ -169,9 +169,11 @@ public class DocManageAppointments extends javax.swing.JFrame {
         fromHour = new javax.swing.JSpinner();
         fromMinute = new javax.swing.JSpinner();
         jLabel2 = new javax.swing.JLabel();
-        ampmSelect = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
         setTimeBtn = new javax.swing.JButton();
         viewAppointments1 = new app.doctor.ViewAppointments();
+
+        setTitle("Manage Appointments");
 
         markAsDoneBtn.setText("Mark As Done");
         markAsDoneBtn.setEnabled(false);
@@ -206,7 +208,7 @@ public class DocManageAppointments extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -225,7 +227,8 @@ public class DocManageAppointments extends javax.swing.JFrame {
 
         jLabel2.setText("Minute");
 
-        ampmSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AM", "PM" }));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("24-Hour Format");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -233,23 +236,27 @@ public class DocManageAppointments extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(ampmSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(fromHour, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(fromMinute, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fromHour, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fromMinute, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(fromHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -257,9 +264,7 @@ public class DocManageAppointments extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(fromMinute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ampmSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
 
         setTimeBtn.setText("Set Time");
@@ -300,7 +305,7 @@ public class DocManageAppointments extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(markAsDoneBtn)
                     .addComponent(rescheduleBtn)
@@ -332,13 +337,26 @@ public class DocManageAppointments extends javax.swing.JFrame {
     }//GEN-LAST:event_rescheduleBtnActionPerformed
 
     private void setTimeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setTimeBtnActionPerformed
-        TimePoint timeStart = new TimePoint(Integer.parseInt(fromHour.getValue().toString()),
+        TimePoint timeStart = new TimePoint(Integer.parseInt(fromHour.getValue().toString()), 
                                             Integer.parseInt(fromMinute.getValue().toString()));
-        selectedAppt.setTimeStart(timeStart);
-        MainGUI.writeAppointmentsToCSV(appointments);
-            
-        viewAppointments1.refreshTable();
-        JOptionPane.showMessageDialog(null, "Appointment Start Time Sucessfully Rescheduled");
+        
+        int comparisonStart = timeStart.inMinutes() - selectedAppt.getSchedule().getTimeFrom().inMinutes();
+        int comparisonEnd   = timeStart.inMinutes() - selectedAppt.getSchedule().getTimeTo().inMinutes();
+        
+        // Means that timeStart set is before the start of the schedule or set
+        // past the end of the schedule
+        if(comparisonStart < 0 || comparisonEnd > 0)  
+        {
+            JOptionPane.showMessageDialog(null, "Error: invalid time set, must be after or at the start of"
+                                              + " the schedule");
+        } else
+        {
+            selectedAppt.setTimeStart(timeStart);
+            MainGUI.writeAppointmentsToCSV(appointments);
+
+            viewAppointments1.refreshTable();
+            JOptionPane.showMessageDialog(null, "Appointment Start Time Sucessfully Rescheduled");
+        }
     }//GEN-LAST:event_setTimeBtnActionPerformed
 
     /**
@@ -377,12 +395,12 @@ public class DocManageAppointments extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> ampmSelect;
     private javax.swing.JList<String> dateList;
     private javax.swing.JSpinner fromHour;
     private javax.swing.JSpinner fromMinute;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;

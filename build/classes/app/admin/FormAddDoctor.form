@@ -1,78 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
-  <NonVisualComponents>
-    <Container class="java.awt.Panel" name="panel1">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="33" green="33" red="33" type="rgb"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="33" green="33" red="33" type="rgb"/>
-        </Property>
-      </Properties>
-
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="284" max="-2" attributes="0"/>
-                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace pref="37" max="32767" attributes="0"/>
-                  <Component id="jLabel1" min="-2" pref="32" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-      </Layout>
-      <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel1">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Castellar" size="36" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="A Song of Ice and Fire"/>
-            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[168, 23]"/>
-            </Property>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Gill Sans Ultra Bold Condensed" size="24" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Medical Centre"/>
-          </Properties>
-        </Component>
-      </SubComponents>
-    </Container>
-    <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
-    </Component>
-  </NonVisualComponents>
   <Properties>
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
       <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -157,209 +85,197 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                  <EmptySpace min="31" pref="31" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="labFirstName1" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="inpFirstName" pref="250" max="32767" attributes="0"/>
-                              </Group>
-                              <Component id="labLastName4" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="labFirstName2" linkSize="1" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="inpUserName" min="-2" pref="250" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="labLastName5" linkSize="1" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="inpPassword" max="32767" attributes="0"/>
-                              </Group>
-                              <Component id="labLastName6" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="labLastName1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labLastName7" linkSize="7" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="inpLastName" min="-2" pref="250" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="167" max="32767" attributes="0"/>
+                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="consultationRateSpinner" min="-2" pref="75" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="labLastName3" max="32767" attributes="0"/>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Component id="labSpecialization" linkSize="2" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="labLastName1" linkSize="7" max="32767" attributes="0"/>
+                                      <Component id="labFirstName1" linkSize="7" pref="93" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="inpFirstName" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
+                                      <Component id="inpLastName" alignment="1" min="-2" pref="250" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="labLastName5" linkSize="1" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="bSpecialization" max="32767" attributes="0"/>
+                                          <Component id="inpPassword" linkSize="4" min="-2" pref="225" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="labSched" linkSize="2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="labFirstName2" linkSize="1" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="FromHour" min="-2" pref="50" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="labSched1" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                                          <Component id="FromMinute" min="-2" pref="50" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="labSched9" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="ToHour" min="-2" pref="50" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                                          <Component id="labSched10" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="ToMinute" min="-2" pref="50" max="-2" attributes="0"/>
+                                          <Component id="inpUserName" linkSize="4" min="-2" pref="250" max="-2" attributes="0"/>
                                       </Group>
+                                      <Component id="labLastName2" alignment="0" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="labSched2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="dMonday" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="labSched3" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="dTuesday" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="labSched4" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="dWednesday" min="-2" max="-2" attributes="0"/>
                               </Group>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="labLastName2" min="-2" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
-                                  <Component id="labSched5" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="dThursday" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="labSched6" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="dFriday" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="labSched7" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="dSaturday" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="labSched8" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="dSunday" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
+                                  <Component id="labLastName6" max="32767" attributes="0"/>
+                                  <EmptySpace min="28" pref="28" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="labLastName4" min="-2" pref="338" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="labSpecialization" linkSize="2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="bSpecialization" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="labSched" linkSize="2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="FromHour" min="-2" pref="50" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                                  <Component id="labSched1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="FromMinute" min="-2" pref="50" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="labSched9" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="ToHour" min="-2" pref="50" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="labSched10" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                                  <Component id="ToMinute" min="-2" pref="50" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="labLastName3" alignment="0" min="-2" pref="331" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="labSched2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="dMonday" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="labSched3" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="dTuesday" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="labSched4" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="dWednesday" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="labSched5" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="dThursday" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="labSched6" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="dFriday" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="labSched7" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="dSaturday" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="labSched8" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="dSunday" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="Doctor" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="345" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="277" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+              <Group type="102" attributes="0">
+                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="labLastName4" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       <Component id="labLastName6" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="labFirstName1" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                              <Component id="inpFirstName" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="0" pref="46" max="32767" attributes="0"/>
-                                  <Component id="labLastName2" min="-2" pref="31" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="labSched5" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                          <Component id="dThursday" min="-2" pref="30" max="-2" attributes="0"/>
-                                          <Component id="labSched6" min="-2" pref="31" max="-2" attributes="0"/>
-                                          <Component id="dFriday" min="-2" pref="30" max="-2" attributes="0"/>
-                                          <Component id="labSched7" min="-2" pref="31" max="-2" attributes="0"/>
-                                          <Component id="dSaturday" min="-2" pref="30" max="-2" attributes="0"/>
-                                          <Component id="labSched8" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="dSunday" min="-2" pref="30" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="labLastName1" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                                      <Component id="inpLastName" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="labLastName3" min="-2" pref="31" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="FromHour" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="ToHour" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="ToMinute" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="labSched" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                                      <Component id="labSched1" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                                      <Component id="FromMinute" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="labSched9" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                                      <Component id="labSched10" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="labSched3" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
-                                      <Component id="labSched4" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
-                                      <Component id="dWednesday" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
-                                      <Component id="dTuesday" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="labFirstName2" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                              <Component id="inpUserName" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="labLastName5" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                              <Component id="inpPassword" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="dMonday" alignment="1" max="32767" attributes="0"/>
-                              <Component id="labSched2" alignment="1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                  <Group type="103" groupAlignment="2" attributes="0">
+                      <Component id="inpFirstName" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="labFirstName2" alignment="2" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="inpUserName" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="labFirstName1" alignment="2" min="-2" pref="31" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="2" attributes="0">
+                      <Component id="labLastName1" alignment="2" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="inpLastName" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="labLastName5" alignment="2" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="inpPassword" alignment="2" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="bSpecialization" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="labSpecialization" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="labLastName7" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="consultationRateSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="81" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="2" attributes="0">
+                      <Component id="labLastName2" alignment="2" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="labLastName3" alignment="2" min="-2" pref="31" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" alignment="0" groupAlignment="2" attributes="0">
+                          <Component id="ToMinute" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="labSched10" alignment="2" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="ToHour" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="labSched9" alignment="2" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="FromMinute" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="labSched1" alignment="2" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="FromHour" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="labSched" alignment="2" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="labSched2" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="dMonday" alignment="2" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="labSched3" alignment="2" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="dTuesday" alignment="2" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="labSched4" alignment="2" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="dWednesday" alignment="2" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="labSched5" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="dThursday" alignment="2" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="dFriday" alignment="2" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="labSched6" alignment="2" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="labSched7" alignment="2" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="dSaturday" alignment="2" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="labSched8" alignment="2" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="dSunday" alignment="2" min="-2" pref="30" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="41" pref="41" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="2" attributes="0">
+                              <Component id="bSpecialization" alignment="2" min="-2" max="-2" attributes="0"/>
+                              <Component id="labSpecialization" alignment="2" min="-2" pref="31" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <EmptySpace type="unrelated" max="32767" attributes="0"/>
                   <Component id="Doctor" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JTextField" name="inpFirstName">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inpFirstNameActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="labSched">
           <Properties>
@@ -378,9 +294,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="inpLastName">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inpLastNameActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JSpinner" name="FromHour">
           <Properties>
@@ -506,25 +419,6 @@
             <Property name="text" type="java.lang.String" value="Specialization:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="bSpecialization">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Yu Gothic Light" size="13" style="0"/>
-            </Property>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
-                <StringItem index="0" value="Cardiology"/>
-                <StringItem index="1" value="Gastroentrology"/>
-              </StringArray>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bSpecializationActionPerformed"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
-        </Component>
         <Component class="javax.swing.JButton" name="Doctor">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -544,6 +438,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Trebuchet MS" size="18" style="1"/>
             </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="[ Day ]"/>
           </Properties>
         </Component>
@@ -570,13 +465,7 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-              <ComponentRef name="buttonGroup1"/>
-            </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dMondayActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="dTuesday">
           <Properties>
@@ -584,9 +473,6 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dTuesdayActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="dWednesday">
           <Properties>
@@ -594,9 +480,6 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dWednesdayActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="dThursday">
           <Properties>
@@ -604,9 +487,6 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dThursdayActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="dFriday">
           <Properties>
@@ -614,9 +494,6 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dFridayActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="dSaturday">
           <Properties>
@@ -624,9 +501,6 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dSaturdayActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="dSunday">
           <Properties>
@@ -634,9 +508,6 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dSundayActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="labFirstName2">
           <Properties>
@@ -669,6 +540,48 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JPasswordField" name="inpPassword">
+        </Component>
+        <Component class="javax.swing.JComboBox" name="bSpecialization">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Yu Gothic UI Light" size="13" style="0"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="2">
+                <StringItem index="0" value="Cardiology"/>
+                <StringItem index="1" value="Gastroentrology"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="labLastName7">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Yu Gothic" size="14" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Consultation Rate"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel3">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Yu Gothic UI Light" size="14" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="PHP"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="consultationRateSpinner">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Yu Gothic UI Light" size="14" style="1"/>
+            </Property>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
