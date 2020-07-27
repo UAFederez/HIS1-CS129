@@ -24,5 +24,11 @@ public class Gastroentrologist extends Doctor {
     public String getSpecialization() {
         return "Gastroentrology";
     }
+
+    @Override
+    public boolean isDescriptionInKeywords(String key) {
+       return ("gastro stomach liver colon intestine"   +  
+                "bowel").contains(key.toLowerCase());
+    }
     
 }

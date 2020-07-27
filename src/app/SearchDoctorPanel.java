@@ -225,6 +225,22 @@ public class SearchDoctorPanel extends javax.swing.JPanel {
                         searchResults.add(doc);
                     }
                 }
+            } else if(filterText.equals("Keyword"))
+            {
+                for(Doctor doc : doctors)
+                {
+                    if(doc.isDescriptionInKeywords(comparisonText))
+                    {
+                        resultsTableModel.addRow(new Object[]{
+                            doc.getLastName(), 
+                            doc.getFirstName(), 
+                            doc.getSpecialization(),
+                            doc.getConsultationRate()
+                        });
+                        
+                        searchResults.add(doc);
+                    }
+                }
             }
         }
         

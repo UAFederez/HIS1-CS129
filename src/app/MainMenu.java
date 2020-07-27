@@ -34,6 +34,9 @@ public class MainMenu extends javax.swing.JFrame {
     ArrayList<PatientInfo> patientData;
     ArrayList<Appointment> appointmentsData;
     
+    // JFrame Forms (General)
+    ViewDoctorDatabase        viewDoctorDB      = new ViewDoctorDatabase();
+    
     // JFrame Forms (Patient)
     SearchDoctorGUI           searchDoctorForm  = new SearchDoctorGUI();
     PatientRequestAppointment pReqApptForm      = new PatientRequestAppointment();
@@ -58,6 +61,8 @@ public class MainMenu extends javax.swing.JFrame {
         this.currentLoggedInAcc = loggedIn;
         accountNameLabel.setText(currentLoggedInAcc.getUserName());
         currentDateLabel.setText(dateFormat.format(new Date()));
+        
+        viewDoctorDB.setDoctors(doctorData);
         
         // Set current viewing patient (for view appointments module)
         
@@ -159,6 +164,7 @@ public class MainMenu extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton13 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -168,10 +174,11 @@ public class MainMenu extends javax.swing.JFrame {
         doctorOptionsPanel = new javax.swing.JPanel();
         jButton5 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
         adminOptionsPanel = new javax.swing.JPanel();
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
+        jButton14 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Patient Main Menu");
@@ -193,10 +200,17 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("View Doctors' Information");
+        jButton4.setText("View List of Doctors");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewDoctorInfoAction(evt);
+            }
+        });
+
+        jButton13.setText("Search for A Doctor");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchDoctorBtnAction(evt);
             }
         });
 
@@ -213,7 +227,8 @@ public class MainMenu extends javax.swing.JFrame {
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(patientOptionsPanelLayout.createSequentialGroup()
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         patientOptionsPanelLayout.setVerticalGroup(
@@ -224,7 +239,9 @@ public class MainMenu extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
+                .addGroup(patientOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton4)
+                    .addComponent(jButton13))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -293,10 +310,17 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        jButton8.setText("View Doctors' Information");
+        jButton8.setText("View List of Doctors");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewDoctorInfoAction(evt);
+            }
+        });
+
+        jButton12.setText("Search for A Doctor");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchDoctorBtnAction(evt);
             }
         });
 
@@ -306,9 +330,14 @@ public class MainMenu extends javax.swing.JFrame {
             doctorOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(doctorOptionsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(doctorOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(doctorOptionsPanelLayout.createSequentialGroup()
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(doctorOptionsPanelLayout.createSequentialGroup()
+                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         doctorOptionsPanelLayout.setVerticalGroup(
@@ -318,6 +347,8 @@ public class MainMenu extends javax.swing.JFrame {
                 .addGroup(doctorOptionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton5)
                     .addComponent(jButton8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton12)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -330,14 +361,19 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        jButton11.setText("View Doctors' Information");
+        jButton11.setText("View List of Doctors");
         jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewDoctorInfoAction(evt);
             }
         });
 
-        jButton12.setText("Search for A Doctor");
+        jButton14.setText("Search for A Doctor");
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchDoctorBtnAction(evt);
+            }
+        });
 
         javax.swing.GroupLayout adminOptionsPanelLayout = new javax.swing.GroupLayout(adminOptionsPanel);
         adminOptionsPanel.setLayout(adminOptionsPanelLayout);
@@ -351,7 +387,7 @@ public class MainMenu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(adminOptionsPanelLayout.createSequentialGroup()
-                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -363,7 +399,7 @@ public class MainMenu extends javax.swing.JFrame {
                     .addComponent(jButton10)
                     .addComponent(jButton11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton12)
+                .addComponent(jButton14)
                 .addContainerGap())
         );
 
@@ -398,8 +434,8 @@ public class MainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void viewDoctorInfoAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDoctorInfoAction
-        searchDoctorForm.getSearchPanel().refreshResultsTable();
-        searchDoctorForm.setVisible(true);
+        viewDoctorDB.refreshTables();
+        viewDoctorDB.setVisible(true);
     }//GEN-LAST:event_viewDoctorInfoAction
 
     private void reqConsultationBtnAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reqConsultationBtnAction
@@ -420,6 +456,11 @@ public class MainMenu extends javax.swing.JFrame {
         manageApptsForm.getAppointmentsPanel().refreshTable();
         manageApptsForm.setVisible(true);
     }//GEN-LAST:event_manageApptsAction
+
+    private void searchDoctorBtnAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchDoctorBtnAction
+        searchDoctorForm.getSearchPanel().refreshResultsTable();
+        searchDoctorForm.setVisible(true);
+    }//GEN-LAST:event_searchDoctorBtnAction
 
     
     // TODO: probably encapsulate this in a CSVWriter since we have a CSVScanner, but
@@ -631,6 +672,8 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;

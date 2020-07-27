@@ -76,4 +76,5 @@ public abstract class Doctor {
     
     public abstract void    computeRate();
     public abstract String  getSpecialization();
+    public abstract boolean isDescriptionInKeywords(String key);
 }

@@ -119,6 +119,11 @@ public class ViewDoctorDatabase extends javax.swing.JFrame {
         this.doctors = doctors;
     }
     
+    public void refreshTables()
+    {
+        
+    }
+    
     /**
      * @param args the command line arguments
      */

@@ -27,5 +27,12 @@ public class Cardiologist extends Doctor {
     public String getSpecialization() {
         return "Cardiology";
     }
+
+    @Override
+    public boolean isDescriptionInKeywords(String key) {
+        return ("heart chest blood pressure vessels "   + 
+                "cardiovascular cholesterol hypertens " + 
+                "coronary").contains(key.toLowerCase());
+    }
     
 }
