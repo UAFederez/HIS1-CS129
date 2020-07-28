@@ -37,7 +37,7 @@ public class FormAddDoctor extends javax.swing.JFrame{
     Doctor d;
     Schedule s;
     Cardiologist cardio;
-    Gastroentrologist gastro;
+    Gastroenterologist gastro;
     
     int day;
     int numOfRows;
@@ -246,7 +246,7 @@ public class FormAddDoctor extends javax.swing.JFrame{
         labLastName6.setText("[ Doctor Log-in Info ]");
 
         bSpecialization.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 13)); // NOI18N
-        bSpecialization.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cardiology", "Gastroentrology" }));
+        bSpecialization.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gastroenterology", "Cardiology", "General Dentistry", "General Practice", "Gynecology", "Hematology", "Internal Medicine", "Nephrology", "Neurology", "Ophthalmology", "Orthopedia Surgery", "Pediatrics", "Psychology", "Urology" }));
 
         labLastName7.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
         labLastName7.setText("Consultation Rate");

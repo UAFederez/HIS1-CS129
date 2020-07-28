@@ -547,9 +547,21 @@
               <Font name="Yu Gothic UI Light" size="13" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
-                <StringItem index="0" value="Cardiology"/>
-                <StringItem index="1" value="Gastroentrology"/>
+              <StringArray count="14">
+                <StringItem index="0" value="Gastroenterology"/>
+                <StringItem index="1" value="Cardiology"/>
+                <StringItem index="2" value="General Dentistry"/>
+                <StringItem index="3" value="General Practice"/>
+                <StringItem index="4" value="Gynecology"/>
+                <StringItem index="5" value="Hematology"/>
+                <StringItem index="6" value="Internal Medicine"/>
+                <StringItem index="7" value="Nephrology"/>
+                <StringItem index="8" value="Neurology"/>
+                <StringItem index="9" value="Ophthalmology"/>
+                <StringItem index="10" value="Orthopedia Surgery"/>
+                <StringItem index="11" value="Pediatrics"/>
+                <StringItem index="12" value="Psychology"/>
+                <StringItem index="13" value="Urology"/>
               </StringArray>
             </Property>
           </Properties>

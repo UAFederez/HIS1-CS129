@@ -7,25 +7,24 @@ package lib;
 
 /**
  *
- * @author uafederez
+ * @author ashda
  */
-public class Cardiologist extends Doctor {
+public class GeneralDentist extends Doctor {
 
-    public Cardiologist(String fName, String lName) {
+    public GeneralDentist(String fName, String lName) {
         super(fName, lName);
     }
 
-
     @Override
     public String getSpecialization() {
-        return "Cardiology";
+        return "General Dentistry";
     }
 
     @Override
     public boolean isDescriptionInKeywords(String key) {
-        return ("heart chest blood pressure vessels "   + 
-                "cardiovascular cholesterol hypertens " + 
-                "coronary").contains(key.toLowerCase());
+        return ("dentist gum root canals teeth crowns" +  
+                "fillings veneers bridges oral mouth").contains(key.toLowerCase());
     }
+
     
 }

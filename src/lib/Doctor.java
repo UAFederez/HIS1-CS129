@@ -15,12 +15,10 @@ import java.util.Random;
  */
 public abstract class Doctor {
     
-    protected double consultationRate;
-    private final String firstName;
-    private final String lastName;
+    private double              consultationRate;
+    private final String        firstName;
+    private final String        lastName;
     private ArrayList<Schedule> schedules;
-    
-    protected final Random randomGenerator = new Random();
     
     public Doctor(String fName, String lName)
     {
@@ -62,7 +60,6 @@ public abstract class Doctor {
                getSpecialization().equals(other.getSpecialization());
     }
     
-    public abstract void    computeRate();
     public abstract String  getSpecialization();
     public abstract boolean isDescriptionInKeywords(String key);
 }

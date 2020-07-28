@@ -7,25 +7,24 @@ package lib;
 
 /**
  *
- * @author uafederez
+ * @author ashda
  */
-public class Cardiologist extends Doctor {
+public class OrthoSurgeon extends Doctor {
 
-    public Cardiologist(String fName, String lName) {
+    public OrthoSurgeon(String fName, String lName) {
         super(fName, lName);
     }
 
 
     @Override
     public String getSpecialization() {
-        return "Cardiology";
+        return "Orthopedia Surgery";
     }
 
     @Override
     public boolean isDescriptionInKeywords(String key) {
-        return ("heart chest blood pressure vessels "   + 
-                "cardiovascular cholesterol hypertens " + 
-                "coronary").contains(key.toLowerCase());
+        return ("ortho surgeon tunnel cubital carpal tennis elbow " + 
+                "ligament meniscus").contains(key.toLowerCase());
     }
     
 }

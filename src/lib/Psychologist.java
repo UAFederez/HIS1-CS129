@@ -7,25 +7,24 @@ package lib;
 
 /**
  *
- * @author uafederez
+ * @author ashda
  */
-public class Cardiologist extends Doctor {
+public class Psychologist extends Doctor {
 
-    public Cardiologist(String fName, String lName) {
+    public Psychologist(String fName, String lName) {
         super(fName, lName);
     }
 
 
     @Override
     public String getSpecialization() {
-        return "Cardiology";
+        return "Psychology";
     }
 
     @Override
     public boolean isDescriptionInKeywords(String key) {
-        return ("heart chest blood pressure vessels "   + 
-                "cardiovascular cholesterol hypertens " + 
-                "coronary").contains(key.toLowerCase());
+        return ("psycholog anxiety panic depression obsessive compulsive ocd " + 
+                "bipolar mood personality ptsd post traumatic stress schizophrenia").contains(key.toLowerCase());
     }
     
 }

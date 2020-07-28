@@ -9,26 +9,22 @@ package lib;
  *
  * @author uafederez
  */
-public class Gastroentrologist extends Doctor {
+public class Gastroenterologist extends Doctor {
 
-    public Gastroentrologist(String fName, String lName) {
+    public Gastroenterologist(String fName, String lName) {
         super(fName, lName);
     }
 
-    @Override
-    public void computeRate() {
-        consultationRate = (450 + randomGenerator.nextInt(700 - 450)) * (1 + 0.12);
-    }
 
     @Override
     public String getSpecialization() {
-        return "Gastroentrology";
+        return "Gastroenterology";
     }
 
     @Override
     public boolean isDescriptionInKeywords(String key) {
        return ("gastro stomach liver colon intestine"   +  
-                "bowel").contains(key.toLowerCase());
+                "bowel digestion digestive").contains(key.toLowerCase());
     }
     
 }

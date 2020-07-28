@@ -7,25 +7,24 @@ package lib;
 
 /**
  *
- * @author uafederez
+ * @author ashda
  */
-public class Cardiologist extends Doctor {
+public class Hematologist extends Doctor {
 
-    public Cardiologist(String fName, String lName) {
+    public Hematologist(String fName, String lName) {
         super(fName, lName);
     }
 
 
     @Override
     public String getSpecialization() {
-        return "Cardiology";
+        return "Hematology";
     }
 
     @Override
     public boolean isDescriptionInKeywords(String key) {
-        return ("heart chest blood pressure vessels "   + 
-                "cardiovascular cholesterol hypertens " + 
-                "coronary").contains(key.toLowerCase());
+        return ("hematologsy hematologist blood leukemia fever fatigue anemia headache " + 
+                "diziness clot hemophilia bleeding nosebleed").contains(key.toLowerCase());
     }
     
 }

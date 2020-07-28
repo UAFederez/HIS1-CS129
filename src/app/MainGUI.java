@@ -206,6 +206,39 @@ public class MainGUI extends javax.swing.JFrame {
         mainMenu.setAccounts(accounts);
         dateSpinner.setModel(new SpinnerDateModel());
         dateSpinner.setEditor(new JSpinner.DateEditor(dateSpinner, dateFormat.toPattern()));
+        
+        /**
+        DoctorFactory fac = new HISDoctorFactory();
+        
+        String[] specs = new String[] {
+            "Gastroenterology",
+            "Cardiology",
+            "General Dentistry",
+            "General Practice",
+            "Gynecology",
+            "Hematology",
+            "Internal Medicine",
+            "Nephrology",
+            "Neurology",
+            "Ophthalmology",
+            "Orthopedia Surgery",
+            "Pediatrics",
+            "Psychology",
+            "Urology"
+        };
+        
+        ArrayList<Doctor> testFac = new ArrayList<>();
+        
+        for(String spec : specs)
+        {
+            Doctor d = fac.createDoctor(spec, "fname", "laname", null);
+            testFac.add(d);
+            if(!d.getSpecialization().equals(spec))
+                System.err.println("Invalid spec: " + d.getSpecialization() + " " + spec);
+        }
+        
+        System.out.println("done");
+        **/
     }
 
     /**

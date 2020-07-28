@@ -7,25 +7,24 @@ package lib;
 
 /**
  *
- * @author uafederez
+ * @author ashda
  */
-public class Cardiologist extends Doctor {
+public class Neurologist extends Doctor {
 
-    public Cardiologist(String fName, String lName) {
+    public Neurologist(String fName, String lName) {
         super(fName, lName);
     }
 
 
     @Override
     public String getSpecialization() {
-        return "Cardiology";
+        return "Neurology";
     }
 
     @Override
     public boolean isDescriptionInKeywords(String key) {
-        return ("heart chest blood pressure vessels "   + 
-                "cardiovascular cholesterol hypertens " + 
-                "coronary").contains(key.toLowerCase());
+        return ("neuro brain alzheimers aneurysm epilepsy seizures " + 
+                "spinal cord palsy tumors cerebral").contains(key.toLowerCase());
     }
     
 }

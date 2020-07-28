@@ -7,25 +7,24 @@ package lib;
 
 /**
  *
- * @author uafederez
+ * @author ashda
  */
-public class Cardiologist extends Doctor {
+public class Gynecologist extends Doctor {
 
-    public Cardiologist(String fName, String lName) {
+    public Gynecologist(String fName, String lName) {
         super(fName, lName);
     }
 
 
     @Override
     public String getSpecialization() {
-        return "Cardiology";
+        return "Gynecology";
     }
 
     @Override
     public boolean isDescriptionInKeywords(String key) {
-        return ("heart chest blood pressure vessels "   + 
-                "cardiovascular cholesterol hypertens " + 
-                "coronary").contains(key.toLowerCase());
+        return ("gynecologist obstetricians pregnancy vagina uterus" +  
+                "born laparoscopy dysmenorrhea infertile").contains(key.toLowerCase());
     }
     
 }
