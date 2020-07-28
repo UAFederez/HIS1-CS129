@@ -5,6 +5,7 @@
  */
 package app.patient;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import lib.Appointment;
@@ -16,6 +17,7 @@ import lib.PatientInfo;
  */
 public class PatientViewAppointments extends javax.swing.JFrame {
 
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private ArrayList<Appointment> appointments;
     private String nameFilter;
     
@@ -120,7 +122,7 @@ public class PatientViewAppointments extends javax.swing.JFrame {
                 tm.addRow(new Object[]{
                     appt.getDoctor().getLastName() + ", " + appt.getDoctor().getFirstName(),
                     appt.getDoctor().getSpecialization(),
-                    appt.getDate(),
+                    dateFormat.format(appt.getDate()),
                     (appt.getTimeStart() != null ? appt.getTimeStart().getHourString() + ":" + appt.getTimeStart().getMinuteString(): 
                                                    "Not yet scheduled"),
                     appt.getNote()

@@ -74,7 +74,6 @@ public class ViewAppointments extends javax.swing.JPanel {
                     sdf.format(appt.getDate()),
                     (appt.getTimeStart() != null ? appt.getTimeStart().getHourString() + ":" + appt.getTimeStart().getMinuteString(): 
                                                    "Not yet scheduled"),
-                    appt.getPatient().getSex(),
                     appt.getNote()
                 });
                 
